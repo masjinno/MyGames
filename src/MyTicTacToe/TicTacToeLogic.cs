@@ -95,7 +95,10 @@ namespace MyTicTacToe
         /// </summary>
         /// <param name="x">横x番目(0～COLUMN_SIZE-1)</param>
         /// <param name="y">縦y番目(0～ROW_SIZE-1)</param>
-        /// <returns></returns>
+        /// <returns>
+        /// true: 入力成功
+        /// false: 入力失敗
+        /// </returns>
         public bool SetBoardXY(int x, int y)
         {
             if (Board[y, x] == TicTacToeMark.None)
