@@ -1,0 +1,16 @@
+﻿<Window x:Class="MyGames.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyGames"
+        mc:Ignorable="d"
+        Title="My Games" Height="350" Width="525" Closing="Window_Closing">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <TextBlock x:Name="message_TextBlock" Margin="20,10,20,0" TextWrapping="Wrap" Text="Choose a Game you want to play." VerticalAlignment="Top" Height="40" FontSize="30" FontStretch="SemiExpanded"/>
+        <ListBox x:Name="gameList_ListBox" Margin="20,60,180,20" UseLayoutRounding="True" SelectionChanged="gameList_ListBox_SelectionChanged"/>
+        <TextBox x:Name="description_TextBox" HorizontalAlignment="Right" Margin="0,60,20,100" TextWrapping="Wrap" Text="chosen game's description" Width="140" IsReadOnly="True"/>
+        <Button x:Name="execute_Button" Content="Execute" HorizontalAlignment="Right" Margin="0,0,20,60" VerticalAlignment="Bottom" Width="140" Height="20" Click="execute_Button_Click" Background="#FFDDDDDD"/>
+        <Button x:Name="quit_Button" Content="Quit" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="140" HorizontalAlignment="Right" Height="20" Click="quit_Button_Click"/>
+    </Grid>
+</Window>
