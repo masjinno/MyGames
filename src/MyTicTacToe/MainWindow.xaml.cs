@@ -69,7 +69,7 @@ namespace MyTicTacToe
 
             // 座標設定
             Point mousePoint = e.GetPosition(board_Grid);
-            Size boardSize = new Size(board_Grid.Width, board_Grid.Height);
+            Size boardSize = new Size(board_Grid.ActualWidth, board_Grid.ActualHeight);
 
             // マス数設定
             int row = TicTacToeLogic.ROW_SIZE;
