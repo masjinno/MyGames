@@ -95,6 +95,11 @@ namespace MyGames
         /// </returns>
         public bool StartGame(int index)
         {
+            if (index < 0 || GamesList.Count() <= index)
+            {
+                return false;
+            }
+
             return GamesList[index].StartProgram();
         }
 
