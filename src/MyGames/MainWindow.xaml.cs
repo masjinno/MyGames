@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace MyGames
 {
@@ -24,6 +25,11 @@ namespace MyGames
         bool IsClosed;
 
         /// <summary>
+        /// ゲームイメージのデフォルト
+        /// </summary>
+        Image DefaultGameImage;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainWindow()
@@ -34,6 +40,16 @@ namespace MyGames
             // メンバ変数初期化
             gamesInfo = new MyGames.GamesInfo();
             IsClosed = false;
+            using (FileStream fs = File.OpenRead(@"..\..\NoImage.png"))
+            {
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = fs;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.EndInit();
+                this.DefaultGameImage = new Image();
+                this.DefaultGameImage.Source = bi;
+            }
 
             // GUI初期化
             // リストボックス初期化
