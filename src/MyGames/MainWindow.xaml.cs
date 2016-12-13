@@ -144,6 +144,7 @@ namespace MyGames
         private void gameList_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             description_TextBox.Text = gamesInfo.GetGameDescription(gameList_ListBox.SelectedIndex);
+            game_Image.Source = gamesInfo.GetGameImageSource(gameList_ListBox.SelectedIndex);
         }
     }
 }
