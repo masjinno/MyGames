@@ -137,6 +137,7 @@ namespace MyGames
             }
             catch (Exception e)
             {
+                MessageBox.Show(e.ToString(), "exception");
                 return false;
             }
         }
@@ -162,6 +163,7 @@ namespace MyGames
                     }
                     catch (Exception e)
                     {
+                        MessageBox.Show(e.ToString(), "exception");
                         return false;
                     }
                 }
@@ -170,5 +172,21 @@ namespace MyGames
             // 終了するものがない場合、falseを返す
             return false;
         }
+        
+
+        ///// <summary>
+        ///// SampleImageを、Name.pngとして保存する
+        ///// </summary>
+        //public void saveSampleImage()
+        //{
+        //    BitmapEncoder encoder = new PngBitmapEncoder();
+        //    BitmapSource bmpSrc = SampleImage.Source as BitmapSource;
+        //    encoder.Frames.Add(BitmapFrame.Create(bmpSrc));
+        //    using (FileStream fs =
+        //        new FileStream(this.Name + ".png", System.IO.FileMode.Create))
+        //    {
+        //        encoder.Save(fs);
+        //    }
+        //}
     }
 }

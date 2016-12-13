@@ -64,6 +64,10 @@ namespace MyGames
         /// <returns>ゲーム説明</returns>
         public string GetGameDescription(int index)
         {
+            if (index < 0 || GamesList.Count() <= index)
+            {
+                return "";
+            }
             return GamesList[index].Description;
         }
 
