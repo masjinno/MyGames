@@ -167,6 +167,12 @@ namespace MyGames
                 description_TextBox.Text = gamesInfo.GetGameDescription(gameList_ListBox.SelectedIndex);
                 game_Image.Source = gamesInfo.GetGameImageSource(gameList_ListBox.SelectedIndex);
             }
+            else
+            {
+                execute_Button.IsEnabled = false;
+                description_TextBox.Text = "No Description";
+                game_Image.Source = DefaultGameImage.Source;
+            }
         }
     }
 }
