@@ -21,7 +21,14 @@ namespace MyGames
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// 全てのゲーム情報
+        /// </summary>
         GamesInfo gamesInfo;
+
+        /// <summary>
+        /// クローズすることになったか否か
+        /// </summary>
         bool IsClosed;
 
         /// <summary>
