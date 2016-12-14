@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace MyGames
 {
@@ -20,8 +21,20 @@ namespace MyGames
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// 全てのゲーム情報
+        /// </summary>
         GamesInfo gamesInfo;
+
+        /// <summary>
+        /// クローズすることになったか否か
+        /// </summary>
         bool IsClosed;
+
+        /// <summary>
+        /// ゲームイメージのデフォルト
+        /// </summary>
+        Image DefaultGameImage;
 
         /// <summary>
         /// コンストラクタ
@@ -34,6 +47,16 @@ namespace MyGames
             // メンバ変数初期化
             gamesInfo = new MyGames.GamesInfo();
             IsClosed = false;
+            using (FileStream fs = File.OpenRead(@"..\..\NoImage.png"))
+            {
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = fs;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.EndInit();
+                this.DefaultGameImage = new Image();
+                this.DefaultGameImage.Source = bi;
+            }
 
             // GUI初期化
             // リストボックス初期化
@@ -44,6 +67,8 @@ namespace MyGames
                 lbi.Content = s;
                 gameList_ListBox.Items.Add(lbi);
             }
+            // Executeボタン初期化
+            execute_Button.IsEnabled = false;
         }
 
         /// <summary>
@@ -143,7 +168,18 @@ namespace MyGames
 
         private void gameList_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            description_TextBox.Text = gamesInfo.GetGameDescription(gameList_ListBox.SelectedIndex);
+            if (gameList_ListBox.SelectedIndex != -1)
+            {
+                execute_Button.IsEnabled = true;
+                description_TextBox.Text = gamesInfo.GetGameDescription(gameList_ListBox.SelectedIndex);
+                game_Image.Source = gamesInfo.GetGameImageSource(gameList_ListBox.SelectedIndex);
+            }
+            else
+            {
+                execute_Button.IsEnabled = false;
+                description_TextBox.Text = "No Description";
+                game_Image.Source = DefaultGameImage.Source;
+            }
         }
     }
 }

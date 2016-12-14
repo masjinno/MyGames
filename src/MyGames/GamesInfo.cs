@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MyGames
 {
@@ -29,11 +31,13 @@ namespace MyGames
                 "TicTacToe",
                 @"..\..\..\MyTicTacToe\bin\"+BUILD_CONFIG+@"\MyTicTacToe.exe",
                 "TicTacToe Game.\nJapanese name is \"Sanmoku-Narabe\" or \"Maru-Batsu Game\".",
+                @"..\..\..\MyTicTacToe\MyTicTacToe.png",
                 ""),
             new GameInfo(
                 "TicTacToe_DUMMY",
                 @"..\..\..\MyTicTacToe\bin\"+BUILD_CONFIG+@"\MyTicTacToe.exe",
                 "[DUMMY] TicTacToe Game.\nJapanese name is \"Sanmoku-Narabe\" or \"Maru-Batsu Game\".",
+                @"..\..\..\MyGames\NoImage.png",
                 ""),
         };
         
@@ -60,7 +64,25 @@ namespace MyGames
         /// <returns>ゲーム説明</returns>
         public string GetGameDescription(int index)
         {
+            if (index < 0 || GamesList.Count() <= index)
+            {
+                return "";
+            }
             return GamesList[index].Description;
+        }
+
+        /// <summary>
+        /// ゲームイメージゲッタ
+        /// </summary>
+        /// <param name="index">リストで何番目か</param>
+        /// <returns>ImageSource</returns>
+        public ImageSource GetGameImageSource(int index)
+        {
+            if (index < 0 || GamesList.Count() <= index)
+            {
+                return null;
+            }
+            return GamesList[index].SampleImage.Source;
         }
 
         /// <summary>
@@ -73,6 +95,11 @@ namespace MyGames
         /// </returns>
         public bool StartGame(int index)
         {
+            if (index < 0 || GamesList.Count() <= index)
+            {
+                return false;
+            }
+
             return GamesList[index].StartProgram();
         }
 

@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace MyGames
 {
@@ -15,27 +18,44 @@ namespace MyGames
         // メンバ変数定義 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         /// <summary>
-        /// ゲーム名称
+        /// ゲーム名称。
+        /// コンストラクタで指定する。必須。
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// ゲーム説明
-        /// </summary>
-        public string Description { get; private set; }
-
-        /// <summary>
-        /// EXEパス
+        /// EXEパス。
+        /// コンストラクタで指定する。必須。
         /// </summary>
         private string Path;
 
         /// <summary>
         /// EXEコマンド引数
+        /// コンストラクタで指定する。必須でない。
         /// </summary>
         private string Arguments;
 
         /// <summary>
-        /// プロセス情報
+        /// ゲーム説明。
+        /// コンストラクタで指定する。必須でない。
+        /// </summary>
+        public string Description { get; private set; }
+        
+        /// <summary>
+        /// サンプルイメージのパス。
+        /// コンストラクタで指定する。必須でない。
+        /// </summary>
+        private string SampleImagePath;
+
+        /// <summary>
+        /// サンプルイメージ。
+        /// SampleImagePathを元に取得する。必須でない。
+        /// </summary>
+        public Image SampleImage { get; private set; }
+
+        
+        /// <summary>
+        /// プロセス情報。
         /// </summary>
         private Process process;
 
@@ -45,14 +65,41 @@ namespace MyGames
         /// <param name="name">ゲーム名</param>
         /// <param name="path">EXEパス(基本的に相対パス)</param>
         /// <param name="description">ゲーム説明</param>
-        /// <param name="arguments">コマンド引数</param>
-        public GameInfo(string name, string path, string description ="NoDescription", string arguments="")
+        /// <param name="imagepath">画像パス。ファイルが存在しなければ、デフォルト画像となる。</param>
+        /// <param name="arguments">コマンド引数。省略可。</param>
+        public GameInfo(
+            string name,
+            string path,
+            string description,
+            string imagePath,
+            string arguments = ""
+            )
         {
-            // ゲーム情報セット
+            // 引数格納
             this.Name = name;
-            this.Description = description;
             this.Path = path;
+            this.Description = description;
+            if (System.IO.File.Exists(imagePath))
+            {
+                this.SampleImagePath = imagePath;
+            }
+            else
+            {
+                this.SampleImagePath = @"..\..\NoImage.png";
+            }
             this.Arguments = arguments;
+
+            // SampleImage生成
+            using (FileStream fs = File.OpenRead(this.SampleImagePath))
+            {
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = fs;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.EndInit();
+                this.SampleImage = new Image();
+                this.SampleImage.Source = bi;
+            }
         }
 
         /// <summary>
@@ -90,6 +137,7 @@ namespace MyGames
             }
             catch (Exception e)
             {
+                MessageBox.Show(e.ToString(), "exception");
                 return false;
             }
         }
@@ -115,6 +163,7 @@ namespace MyGames
                     }
                     catch (Exception e)
                     {
+                        MessageBox.Show(e.ToString(), "exception");
                         return false;
                     }
                 }
@@ -123,5 +172,21 @@ namespace MyGames
             // 終了するものがない場合、falseを返す
             return false;
         }
+        
+
+        ///// <summary>
+        ///// SampleImageを、Name.pngとして保存する
+        ///// </summary>
+        //public void saveSampleImage()
+        //{
+        //    BitmapEncoder encoder = new PngBitmapEncoder();
+        //    BitmapSource bmpSrc = SampleImage.Source as BitmapSource;
+        //    encoder.Frames.Add(BitmapFrame.Create(bmpSrc));
+        //    using (FileStream fs =
+        //        new FileStream(this.Name + ".png", System.IO.FileMode.Create))
+        //    {
+        //        encoder.Save(fs);
+        //    }
+        //}
     }
 }
