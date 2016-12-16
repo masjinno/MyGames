@@ -57,7 +57,7 @@ namespace MyGames
                 this.DefaultGameImage = new Image();
                 this.DefaultGameImage.Source = bi;
             }
-
+            
             // GUI初期化
             // リストボックス初期化
             string[] gameNames = gamesInfo.GetAllGameNames();
