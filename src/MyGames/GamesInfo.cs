@@ -99,8 +99,12 @@ namespace MyGames
             
             // 全てのゲーム名(⇔セクション名) を取得
             int numGames;  // ゲーム個数
-            string[] gameSections;
-            gameSections = IniFile.GetPrivateProfileSectionAsStringArray("GameRegistration", Directory.GetCurrentDirectory() + @"\" + CONF_FILENAME);
+            string[] gameSections = IniFile.GetPrivateProfileSectionAsStringArray("GameRegistration", Directory.GetCurrentDirectory() + @"\" + CONF_FILENAME);
+            if (gameSections == null)
+            {
+                return -1;
+            }
+
             numGames = gameSections.Count();
             if (numGames <= 0)
             {
