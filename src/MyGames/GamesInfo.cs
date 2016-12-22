@@ -70,7 +70,7 @@ namespace MyGames
         {
             // 読み込んだゲーム数を格納する
             int numGames = 0;
-            
+
             // 設定ファイルロード
             numGames = LoadConfigFile();
             if (numGames <= 0)
@@ -96,7 +96,7 @@ namespace MyGames
                 // ファイルがなければ即-1を返す。
                 return -1;
             }
-            
+
             // 全てのゲーム名(⇔セクション名) を取得
             int numGames;  // ゲーム個数
             string[] gameSections = IniFile.GetPrivateProfileSectionAsStringArray("GameRegistration", Directory.GetCurrentDirectory() + @"\" + CONF_FILENAME);
@@ -150,14 +150,14 @@ namespace MyGames
                         values[i] = gameParams.ToString();
                         i++;
                     }
-                    
-                    GamesList[gameIndex] = new GameInfo(values[0], values[1], values[2], values[3], values[4]);
 
+                    GamesList[gameIndex] = new GameInfo(values[0], values[1], values[2], values[3], values[4]);
+                    
                     gameIndex++;
                 }
             } while (gameSectionNameLength != 0);
 
-            return 0;
+            return numGames;
         }
 
         /// <summary>

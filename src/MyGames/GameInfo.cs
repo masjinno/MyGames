@@ -89,16 +89,23 @@ namespace MyGames
             }
             this.Arguments = arguments;
 
-            // SampleImage生成
-            using (FileStream fs = File.OpenRead(this.SampleImagePath))
+            try
             {
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = fs;
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.EndInit();
-                this.SampleImage = new Image();
-                this.SampleImage.Source = bi;
+                // SampleImage生成
+                using (FileStream fs = File.OpenRead(this.SampleImagePath))
+                {
+                    BitmapImage bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.StreamSource = fs;
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.EndInit();
+                    this.SampleImage = new Image();
+                    this.SampleImage.Source = bi;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
