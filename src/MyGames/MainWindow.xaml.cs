@@ -47,17 +47,7 @@ namespace MyGames
             // メンバ変数初期化
             gamesInfo = new MyGames.GamesInfo();
             IsClosed = false;
-            using (FileStream fs = File.OpenRead(@"..\..\NoImage.png"))
-            {
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = fs;
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.EndInit();
-                this.DefaultGameImage = new Image();
-                this.DefaultGameImage.Source = bi;
-            }
-
+            
             // GUI初期化
             // リストボックス初期化
             string[] gameNames = gamesInfo.GetAllGameNames();
