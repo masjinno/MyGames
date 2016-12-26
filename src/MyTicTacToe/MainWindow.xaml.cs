@@ -69,7 +69,7 @@ namespace MyTicTacToe
 
             // 座標設定
             Point mousePoint = e.GetPosition(board_Grid);
-            Size boardSize = new Size(board_Grid.Width, board_Grid.Height);
+            Size boardSize = new Size(board_Grid.ActualWidth, board_Grid.ActualHeight);
 
             // マス数設定
             int row = TicTacToeLogic.ROW_SIZE;
@@ -79,30 +79,34 @@ namespace MyTicTacToe
             int x, y;
             x = (int)(mousePoint.X / (boardSize.Width / column));
             y = (int)(mousePoint.Y / (boardSize.Height / row));
-            ticTacToeLogic.SetBoardXY(x, y);
-
-            // TODO: 盤面描画更新処理
-            //
-            //
+            
+            // ボードへの入力処理
+            bool bSetBoardSuccess = ticTacToeLogic.SetBoardXY(x, y);
 
             // ゲーム終了判定
-            var gameFinish = ticTacToeLogic.IsFinishedGame();
-            bool fin = gameFinish.Item1;
-            TicTacToeMark gm = gameFinish.Item2;
+            if (bSetBoardSuccess)
+            {
+                // TODO: 盤面描画更新処理
+                //
+                //
 
-            if (fin)
-            {
-                // ゲーム終了ならばメッセージ表示
-                MessageBox.Show(
-                    ticTacToeLogic.statement,
-                    "Game Finished!",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-            }
-            else
-            {
-                // ゲーム続行
-                ticTacToeLogic.ContinueGame();
+                var gameFinish = ticTacToeLogic.IsFinishedGame();
+                bool fin = gameFinish.Item1;
+
+                if (fin)
+                {
+                    // ゲーム終了ならばメッセージ表示
+                    MessageBox.Show(
+                        ticTacToeLogic.statement,
+                        "Game Finished!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                else
+                {
+                    // ゲーム続行
+                    ticTacToeLogic.ContinueGame();
+                }
             }
         }
     }
