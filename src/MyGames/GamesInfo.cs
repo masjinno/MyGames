@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.IO;
@@ -151,6 +152,14 @@ namespace MyGames
                         i++;
                     }
 
+                    if (!IsValidPath(values[1]))
+                    {
+                        MessageBox.Show(
+                            "Invalid Path : " + values[1] + ".\n" +
+                            "Loading default settings.",
+                            "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return -1;
+                    }
                     GamesList[gameIndex] = new GameInfo(values[0], values[1], values[2], values[3], values[4]);
                     
                     gameIndex++;
@@ -159,7 +168,18 @@ namespace MyGames
 
             return numGames;
         }
-
+        
+        /// <summary>
+        /// ファイルパスが妥当かチェックする。
+        /// 現状、パスのファイルが存在すれば妥当であると判断している。
+        /// </summary>
+        /// <param name="path">ファイルパス</param>
+        /// <returns></returns>
+        private bool IsValidPath(string path)
+        {
+            return System.IO.File.Exists(path);
+        }
+        
         /// <summary>
         /// デフォルト設定をロードする。
         /// </summary>

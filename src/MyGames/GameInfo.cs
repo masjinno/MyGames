@@ -77,8 +77,19 @@ namespace MyGames
         {
             // 引数格納
             this.Name = name;
-            this.Path = path;
+
+            if (System.IO.File.Exists(path))
+            {
+                this.Path = path;
+            }
+            else
+            {
+                this.Path = "";
+                MessageBox.Show("invalid exe path.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             this.Description = description;
+
             if (System.IO.File.Exists(imagePath))
             {
                 this.SampleImagePath = imagePath;
@@ -87,6 +98,7 @@ namespace MyGames
             {
                 this.SampleImagePath = @"..\..\NoImage.png";
             }
+
             this.Arguments = arguments;
 
             try
@@ -161,18 +173,19 @@ namespace MyGames
             // 起動していないなら何もせずfalseを返す
             if (process != null)
             {
-                // 終了していないなら、プロセスを閉じる
-                if (!process.HasExited)
+                try
                 {
-                    try
+                    
+                    // 終了していないなら、プロセスを閉じる
+                    if (!process.HasExited)
                     {
                         return process.CloseMainWindow();
                     }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.ToString(), "exception");
-                        return false;
-                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString(), "exception");
+                    return false;
                 }
             }
             
