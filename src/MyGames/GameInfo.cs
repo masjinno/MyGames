@@ -96,7 +96,15 @@ namespace MyGames
             }
             else
             {
-                this.SampleImagePath = @"..\..\NoImage.png";
+                // デフォルトイメージのパス(2択)
+                if (File.Exists(@"..\..\NoImage.png"))
+                {
+                    this.SampleImagePath = @"..\..\NoImage.png";
+                }
+                else
+                {
+                    this.SampleImagePath = @".\Games\NoImage.png";
+                }
             }
 
             this.Arguments = arguments;
