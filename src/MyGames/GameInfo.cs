@@ -77,28 +77,55 @@ namespace MyGames
         {
             // 引数格納
             this.Name = name;
-            this.Path = path;
+
+            if (System.IO.File.Exists(path))
+            {
+                this.Path = path;
+            }
+            else
+            {
+                this.Path = "";
+                MessageBox.Show("invalid exe path.", "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             this.Description = description;
+
             if (System.IO.File.Exists(imagePath))
             {
                 this.SampleImagePath = imagePath;
             }
             else
             {
-                this.SampleImagePath = @"..\..\NoImage.png";
+                // デフォルトイメージのパス(2択)
+                if (File.Exists(@"..\..\NoImage.png"))
+                {
+                    this.SampleImagePath = @"..\..\NoImage.png";
+                }
+                else
+                {
+                    this.SampleImagePath = @".\Games\NoImage.png";
+                }
             }
+
             this.Arguments = arguments;
 
-            // SampleImage生成
-            using (FileStream fs = File.OpenRead(this.SampleImagePath))
+            try
             {
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = fs;
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.EndInit();
-                this.SampleImage = new Image();
-                this.SampleImage.Source = bi;
+                // SampleImage生成
+                using (FileStream fs = File.OpenRead(this.SampleImagePath))
+                {
+                    BitmapImage bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.StreamSource = fs;
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.EndInit();
+                    this.SampleImage = new Image();
+                    this.SampleImage.Source = bi;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -154,18 +181,19 @@ namespace MyGames
             // 起動していないなら何もせずfalseを返す
             if (process != null)
             {
-                // 終了していないなら、プロセスを閉じる
-                if (!process.HasExited)
+                try
                 {
-                    try
+                    
+                    // 終了していないなら、プロセスを閉じる
+                    if (!process.HasExited)
                     {
                         return process.CloseMainWindow();
                     }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.ToString(), "exception");
-                        return false;
-                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString(), "exception");
+                    return false;
                 }
             }
             
