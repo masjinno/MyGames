@@ -62,7 +62,7 @@ namespace MyTicTacToe
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // ゲーム中でない場合は何もしない
-            if (ticTacToeLogic.GetTurn() == TicTacToeMark.None)
+            if (ticTacToeLogic.GetTurn() == TicTacToeMark.MarkNum.None)
             {
                 return;
             }
@@ -86,9 +86,8 @@ namespace MyTicTacToe
             // ゲーム終了判定
             if (bSetBoardSuccess)
             {
-                // TODO: 盤面描画更新処理
-                //
-                //
+                // 入力に応じて盤面更新
+                b.Content = TicTacToeMark.GetMarkString(ticTacToeLogic.GetTurn());
 
                 var gameFinish = ticTacToeLogic.IsFinishedGame();
                 bool fin = gameFinish.Item1;
