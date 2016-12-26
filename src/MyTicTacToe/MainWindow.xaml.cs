@@ -47,39 +47,22 @@ namespace MyTicTacToe
         }
 
         /// <summary>
-        /// ボタンクリックイベント
+        /// ボタン押下に伴う盤面更新処理
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void reset_Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (ticTacToeLogic == null) return;
-            ticTacToeLogic.ResetGame();
-
-            MessageBox.Show("!");
-        }
-
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        /// <param name="b">押されたボタン</param>
+        private void BoardUpdate(Button b, int x, int y)
         {
             // ゲーム中でない場合は何もしない
             if (ticTacToeLogic.GetTurn() == TicTacToeMark.MarkNum.None)
             {
                 return;
             }
+            // xyの妥当性チェック(0～2のみ有効)
+            if (x < 0 || 3 <= x || y < 0 || 3 <= y)
+            {
+                return;
+            }
 
-            // 座標設定
-            Point mousePoint = e.GetPosition(board_Grid);
-            Size boardSize = new Size(board_Grid.ActualWidth, board_Grid.ActualHeight);
-
-            // マス数設定
-            int row = TicTacToeLogic.ROW_SIZE;
-            int column = TicTacToeLogic.COLUMN_SIZE;
-
-            // 打たれたマス特定
-            int x, y;
-            x = (int)(mousePoint.X / (boardSize.Width / column));
-            y = (int)(mousePoint.Y / (boardSize.Height / row));
-            
             // ボードへの入力処理
             bool bSetBoardSuccess = ticTacToeLogic.SetBoardXY(x, y);
 
@@ -107,6 +90,76 @@ namespace MyTicTacToe
                     ticTacToeLogic.ContinueGame();
                 }
             }
+        }
+
+
+        // 以下、イベントハンドラ
+
+        /// <summary>
+        /// ボタンクリックイベント
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void reset_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (ticTacToeLogic == null) return;
+            ticTacToeLogic.ResetGame();
+            board00_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board01_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board02_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board10_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board11_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board12_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board20_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board21_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board22_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+
+            MessageBox.Show("!");
+        }
+
+        private void board00_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board00_Button, 0, 0);
+        }
+
+        private void board01_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board01_Button, 0, 1);
+        }
+
+        private void board02_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board02_Button, 0, 2);
+        }
+
+        private void board10_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board10_Button, 1, 0);
+        }
+
+        private void board11_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board11_Button, 1, 1);
+        }
+
+        private void board12_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board12_Button, 1, 2);
+        }
+
+        private void board20_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board20_Button, 2, 0);
+        }
+
+        private void board21_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board21_Button, 2, 1);
+        }
+
+        private void board22_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardUpdate(board22_Button, 2, 2);
         }
     }
 }
