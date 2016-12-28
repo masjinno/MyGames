@@ -113,8 +113,6 @@ namespace MyTicTacToe
             board20_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
             board21_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
             board22_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-
-            MessageBox.Show("!");
         }
 
         private void board00_Button_Click(object sender, RoutedEventArgs e)
