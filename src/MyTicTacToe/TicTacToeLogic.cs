@@ -20,7 +20,7 @@ namespace MyTicTacToe
             None
         }
 
-        private static string[] MarkString = new string[] { "○", "×", "" };
+        private static string[] MarkString = new string[] { "○", "✕", "" };
 
         public static string GetMarkString(MarkNum mn)
         {
