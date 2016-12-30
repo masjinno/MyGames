@@ -101,7 +101,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if not exist "$(SolutionDir)bin\Games\" (
+    <PostBuildEvent>if not exist "$(SolutionDir)bin\Games\$(TargetName)\" (
     mkdir "$(SolutionDir)bin\Games\$(TargetName)\"
 )
 copy "$(TargetPath)" "$(SolutionDir)bin\Games\$(TargetName)\"
