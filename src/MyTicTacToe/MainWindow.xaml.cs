@@ -44,6 +44,23 @@ namespace MyTicTacToe
             InitializeComponent();
 
             ticTacToeLogic = new TicTacToeLogic();
+            ResetGame();
+        }
+
+        private void ResetGame()
+        {
+            if (ticTacToeLogic == null) return;
+            ticTacToeLogic.ResetGame();
+            board00_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board01_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board02_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board10_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board11_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board12_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board20_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board21_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            board22_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            SetTurnVisiblity();
         }
 
         /// <summary>
@@ -88,7 +105,25 @@ namespace MyTicTacToe
                 {
                     // ゲーム続行
                     ticTacToeLogic.ContinueGame();
+                    SetTurnVisiblity();
                 }
+            }
+        }
+
+        /// <summary>
+        /// 画面のターンマーク表示切替え
+        /// </summary>
+        private void SetTurnVisiblity()
+        {
+            if (ticTacToeLogic.GetTurn() == TicTacToeMark.MarkNum.Circle)
+            {
+                circleTurnMark_Rectangle.Visibility = Visibility.Visible;
+                crossTurnMark_Rectangle.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                circleTurnMark_Rectangle.Visibility = Visibility.Hidden;
+                crossTurnMark_Rectangle.Visibility = Visibility.Visible;
             }
         }
 
@@ -113,6 +148,7 @@ namespace MyTicTacToe
             board20_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
             board21_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
             board22_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            SetTurnVisiblity();
         }
 
         private void board00_Button_Click(object sender, RoutedEventArgs e)

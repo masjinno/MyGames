@@ -21,6 +21,8 @@
         </Grid.Background>
         <TextBlock x:Name="circle_TextBlock" Margin="20,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="○" FontSize="78" FontWeight="Bold" HorizontalAlignment="Left" FontFamily="MS Gothic"/>
         <TextBlock x:Name="cross_TextBlock" Margin="0,25,20,0" TextWrapping="Wrap" Text="✕" FontSize="78" VerticalAlignment="Top" HorizontalAlignment="Right" FontWeight="Bold" FontFamily="MS Gothic"/>
+        <Rectangle x:Name="circleTurnMark_Rectangle" Width="80" Height="10" Fill="Black" Canvas.Left="10" Canvas.Top="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,103,0,0"/>
+        <Rectangle x:Name="crossTurnMark_Rectangle" Width="80" Height="10" Fill="Black" Canvas.Left="10" Canvas.Top="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,103,20,0"/>
         <Grid x:Name="board_Grid" Margin="120,25,120,68" ShowGridLines="True" Background="#FFFFC47B" UseLayoutRounding="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
