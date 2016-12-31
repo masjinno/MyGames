@@ -34,7 +34,7 @@ namespace MyTicTacToe
         /// <summary>
         /// チックタックトーのロジックを受け持つ
         /// </summary>
-        TicTacToeLogic ticTacToeLogic;
+        TicTacToeData ticTacToeData;
 
         /// <summary>
         /// コンストラクタ
@@ -43,23 +43,23 @@ namespace MyTicTacToe
         {
             InitializeComponent();
 
-            ticTacToeLogic = new TicTacToeLogic();
+            ticTacToeData = new TicTacToeData(TicTacToeLogic.ROW_SIZE, TicTacToeLogic.COLUMN_SIZE);
             ResetGame();
         }
 
         private void ResetGame()
         {
-            if (ticTacToeLogic == null) return;
-            ticTacToeLogic.ResetGame();
-            board00_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board01_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board02_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board10_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board11_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board12_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board20_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board21_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board22_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            if (ticTacToeData == null) return;
+            ticTacToeData.ResetGame();
+            board00_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board01_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board02_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board10_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board11_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board12_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board20_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board21_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board22_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
             SetTurnVisiblity();
         }
 
@@ -70,33 +70,32 @@ namespace MyTicTacToe
         private void BoardUpdate(Button b, int x, int y)
         {
             // ゲーム中でない場合は何もしない
-            if (ticTacToeLogic.GetTurn() == TicTacToeMark.MarkNum.None)
+            if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.None)
             {
                 return;
             }
-            // xyの妥当性チェック(0～2のみ有効)
-            if (x < 0 || 3 <= x || y < 0 || 3 <= y)
+            // xyの妥当性チェック
+            if (x < 0 || TicTacToeLogic.COLUMN_SIZE <= x || y < 0 || TicTacToeLogic.ROW_SIZE <= y)
             {
                 return;
             }
 
             // ボードへの入力処理
-            bool bSetBoardSuccess = ticTacToeLogic.SetBoardXY(x, y);
+            bool bSetBoardSuccess = ticTacToeData.SetBoardXY(x, y);
 
             // ゲーム終了判定
             if (bSetBoardSuccess)
             {
                 // 入力に応じて盤面更新
-                b.Content = TicTacToeMark.GetMarkString(ticTacToeLogic.GetTurn());
+                b.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(ticTacToeData.GetTurn());
 
-                var gameFinish = ticTacToeLogic.IsFinishedGame();
-                bool fin = gameFinish.Item1;
+                var gameFinish = ticTacToeData.IsFinishedGame();
 
-                if (fin)
+                if (gameFinish.Item1)
                 {
                     // ゲーム終了ならばメッセージ表示
                     MessageBox.Show(
-                        ticTacToeLogic.statement,
+                        ticTacToeData.statement,
                         "Game Finished!",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
@@ -104,7 +103,7 @@ namespace MyTicTacToe
                 else
                 {
                     // ゲーム続行
-                    ticTacToeLogic.ContinueGame();
+                    ticTacToeData.ContinueGame();
                     SetTurnVisiblity();
                 }
             }
@@ -115,7 +114,7 @@ namespace MyTicTacToe
         /// </summary>
         private void SetTurnVisiblity()
         {
-            if (ticTacToeLogic.GetTurn() == TicTacToeMark.MarkNum.Circle)
+            if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Circle)
             {
                 circleTurnMark_Rectangle.Visibility = Visibility.Visible;
                 crossTurnMark_Rectangle.Visibility = Visibility.Hidden;
@@ -137,17 +136,17 @@ namespace MyTicTacToe
         /// <param name="e"></param>
         private void reset_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ticTacToeLogic == null) return;
-            ticTacToeLogic.ResetGame();
-            board00_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board01_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board02_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board10_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board11_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board12_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board20_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board21_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
-            board22_Button.Content = TicTacToeMark.GetMarkString(TicTacToeMark.MarkNum.None);
+            if (ticTacToeData == null) return;
+            ticTacToeData.ResetGame();
+            board00_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board01_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board02_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board10_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board11_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board12_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board20_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board21_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
+            board22_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
             SetTurnVisiblity();
         }
 

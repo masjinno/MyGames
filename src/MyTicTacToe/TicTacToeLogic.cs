@@ -6,41 +6,52 @@ using System.Threading.Tasks;
 
 namespace MyTicTacToe
 {
-    public static class TicTacToeMark
+    /// <summary>
+    /// チックタックトーのロジック
+    /// </summary>
+    public static class TicTacToeLogic
     {
         /// <summary>
-        /// 盤面のマーク
-        /// Circle : ○
-        /// Cross : ✕
+        /// マークに関する定義
         /// </summary>
-        public enum MarkNum
+        public static class TicTacToeMark
         {
-            Circle,
-            Cross,
-            None
-        }
-
-        private static string[] MarkString = new string[] { "○", "✕", "" };
-
-        public static string GetMarkString(MarkNum mn)
-        {
-            string ret = MarkString[2];
-            switch (mn)
+            /// <summary>
+            /// 盤面のマークを意味する値
+            /// Circle : ○
+            /// Cross : ✕
+            /// </summary>
+            public enum MarkNum
             {
-                case MarkNum.Circle:
-                    ret = MarkString[0];
-                    break;
-                case MarkNum.Cross:
-                    ret = MarkString[1];
-                    break;
+                Circle,
+                Cross,
+                None
             }
-            return ret;
-        }
-        
-    }
 
-    class TicTacToeLogic
-    {
+            /// <summary> マーク文字列 </summary>
+            private static string[] MarkString = new string[] { "○", "✕", "" };
+
+            /// <summary>
+            /// マーク番号に対応するマーク文字列を返す
+            /// </summary>
+            /// <param name="mn">マーク番号</param>
+            /// <returns>対応するマーク文字列</returns>
+            public static string GetMarkString(MarkNum mn)
+            {
+                string ret = MarkString[2];
+                switch (mn)
+                {
+                    case MarkNum.Circle:
+                        ret = MarkString[0];
+                        break;
+                    case MarkNum.Cross:
+                        ret = MarkString[1];
+                        break;
+                }
+                return ret;
+            }
+        }
+
         // 定数定義 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         /// <summary>
@@ -54,143 +65,57 @@ namespace MyTicTacToe
         public const int COLUMN_SIZE = 3;
 
 
-        // メンバ変数定義 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-        /// <summary>
-        /// 盤面。
-        /// +-----+-----+-----+
-        /// |[0,0]|[0,1]|[0,2]|  ROW 0
-        /// +-----+-----+-----+
-        /// |[1,0]|[1,1]|[1,2]|  ROW 1
-        /// +-----+-----+-----+
-        /// |[2,0]|[2,1]|[2,2]|  ROW 2
-        /// +-----+-----+-----+
-        ///  COL 0 COL 1 COL 2
-        /// </summary>
-        private TicTacToeMark.MarkNum[,] Board;
-
-        /// <summary>
-        /// 手番。
-        /// Mark.Noneはありえない。
-        /// </summary>
-        private TicTacToeMark.MarkNum Turn;
-
-        /// <summary>
-        /// 外部へのメッセージ。(MS-DOSのERRORLEVELを文字列にしたイメージ)
-        /// ステータスバーなどがあれば、そこへの表示を想定する。
-        /// クラス外へ処理が戻る前に、何らかの値を代入すること。
-        /// </summary>
-        public string statement;
-
-
-        // メソッド定義 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-        // コンストラクタ
-        public TicTacToeLogic()
-        {
-            Board = new TicTacToeMark.MarkNum[ROW_SIZE, COLUMN_SIZE];
-
-            ResetGame();
-        }
-
-        /// <summary>
-        /// Board X,Y Getter.
-        /// </summary>
-        /// <param name="x">横位置(0～COLUMN_SIZE-1)</param>
-        /// <param name="y">縦位置(0～ROW_SIZE-1)</param>
-        /// <returns>Board[y,x]</returns>
-        public TicTacToeMark.MarkNum GetBoardXY(int x, int y)
-        {
-            if ((0 <= x && x < COLUMN_SIZE) || (0 <= y && y < ROW_SIZE))
-            {
-                statement = "GetBoardXY(): ERROR. Arg x or y is WRONG. (0-x-" + COLUMN_SIZE + ", 0-y-" + ROW_SIZE + ")";
-                return TicTacToeMark.MarkNum.None;
-            }
-
-            statement = "";
-            return Board[y, x];
-        }
-
-        /// <summary>
-        /// Board Setter.
-        /// </summary>
-        /// <param name="x">横x番目(0～COLUMN_SIZE-1)</param>
-        /// <param name="y">縦y番目(0～ROW_SIZE-1)</param>
-        /// <returns>
-        /// true: 入力成功
-        /// false: 入力失敗
-        /// </returns>
-        public bool SetBoardXY(int x, int y)
-        {
-            if (Board[y, x] == TicTacToeMark.MarkNum.None)
-            {
-                Board[y, x] = Turn;
-                statement = "";
-                return true;
-            }
-            else
-            {
-                statement = "There is " + Board[y, x].ToString();
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Turn Getter.
-        /// </summary>
-        /// <returns>Turn</returns>
-        public TicTacToeMark.MarkNum GetTurn()
-        {
-            statement = "";
-            return Turn;
-        }
-
-        /// <summary>
-        /// ゲーム続行時の処理
-        /// </summary>
-        public void ContinueGame()
-        {
-            // 手番更新
-            if (Turn != TicTacToeMark.MarkNum.None - 1)
-            {
-                Turn = Turn + 1;
-            }
-            else
-            {
-                Turn = TicTacToeMark.MarkNum.Circle;
-            }
-
-            statement = "Turn is " + Turn.ToString();
-        }
-
-        /// <summary>
-        /// ゲームをリセットする
-        /// </summary>
-        public void ResetGame()
-        {
-            for (int i = 0; i < ROW_SIZE; i++)
-            {
-                for (int j = 0; j < COLUMN_SIZE; j++)
-                {
-                    Board[i, j] = TicTacToeMark.MarkNum.None;
-                }
-            }
-
-            Turn = TicTacToeMark.MarkNum.Circle;
-
-            statement = "Game Reset.";
-        }
-
+        // 静的メソッド定義 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
         /// <summary>
         /// 勝敗判定を行う。勝利が1パターン見つかった時点で探索を終了する。
         /// </summary>
+        /// <param name="board">盤面情報</param>
+        /// <param name="statement"></param>
         /// <returns>
         /// bool : true->ゲーム終了。 false->game続行。
         /// Mark : 勝利マーク。勝負中もしくは引き分けであればNoneを返す。
         /// </returns>
-        public Tuple<bool, TicTacToeMark.MarkNum> IsFinishedGame()
+        public static Tuple<bool, TicTacToeMark.MarkNum> IsFinishedGame(TicTacToeMark.MarkNum[,] board)
         {
+            // 各方向のゲーム終了チェック結果格納用変数
+            Tuple<bool, TicTacToeMark.MarkNum> gameFinish;
+
             // 横方向の勝敗判定
+            gameFinish = IsFinishedGameRowDirection(board);
+            if (gameFinish.Item1)
+            {
+                return gameFinish;
+            }
+
+            // 縦方向の勝敗判定
+            gameFinish = IsFinishedGameColumnDirection(board);
+            if (gameFinish.Item1)
+            {
+                return gameFinish;
+            }
+
+            // 斜め方向の勝敗判定 (ROW_SIZE == COLUMN_SIZE の場合のみ実施する)
+            if (ROW_SIZE == COLUMN_SIZE)
+            {
+                gameFinish = IsFinishedGameDiagonal(board);
+                if (gameFinish.Item1)
+                {
+                    return gameFinish;
+                }
+            }
+
+            // ボードが埋まっていればゲーム終了
+            return Tuple.Create(IsFilledBoard(board), TicTacToeMark.MarkNum.None);
+        }
+
+        /// <summary>
+        /// 行方向(横)の終了判定チェック
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private static Tuple<bool, TicTacToeMark.MarkNum> IsFinishedGameRowDirection(TicTacToeMark.MarkNum[,] board)
+        {
             for (TicTacToeMark.MarkNum m = TicTacToeMark.MarkNum.Circle; m < TicTacToeMark.MarkNum.None; m++)
             {
                 for (int j = 0; j < COLUMN_SIZE; j++)
@@ -199,7 +124,7 @@ namespace MyTicTacToe
                     markCount = 0;
                     for (int i = 0; i < ROW_SIZE; i++)
                     {
-                        if (Board[i, j] != m)
+                        if (board[i, j] != m)
                         {
                             break;
                         }
@@ -207,14 +132,21 @@ namespace MyTicTacToe
                     }
                     if (markCount == ROW_SIZE)
                     {
-                        Turn = TicTacToeMark.MarkNum.None;
-                        statement = m.ToString() + " WON!";
                         return Tuple.Create(true, m);
                     }
                 }
             }
 
-            // 縦方向の勝敗判定
+            return Tuple.Create(false, TicTacToeMark.MarkNum.None);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private static Tuple<bool, TicTacToeMark.MarkNum> IsFinishedGameColumnDirection(TicTacToeMark.MarkNum[,] board)
+        {
             for (TicTacToeMark.MarkNum m = TicTacToeMark.MarkNum.Circle; m < TicTacToeMark.MarkNum.None; m++)
             {
                 for (int i = 0; i < ROW_SIZE; i++)
@@ -223,7 +155,7 @@ namespace MyTicTacToe
                     markCount = 0;
                     for (int j = 0; j < COLUMN_SIZE; j++)
                     {
-                        if (Board[i, j] != m)
+                        if (board[i, j] != m)
                         {
                             break;
                         }
@@ -231,73 +163,82 @@ namespace MyTicTacToe
                     }
                     if (markCount == COLUMN_SIZE)
                     {
-                        Turn = TicTacToeMark.MarkNum.None;
-                        statement = m.ToString() + " WON!";
                         return Tuple.Create(true, m);
                     }
                 }
             }
 
-            // 斜め方向の勝敗判定 (ROW_SIZE == COLUMN_SIZE の場合のみ実施する)
-            if (ROW_SIZE == COLUMN_SIZE)
+            return Tuple.Create(false, TicTacToeMark.MarkNum.None);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private static Tuple<bool, TicTacToeMark.MarkNum> IsFinishedGameDiagonal(TicTacToeMark.MarkNum[,] board)
+        {
+            for (TicTacToeMark.MarkNum m = TicTacToeMark.MarkNum.Circle; m < TicTacToeMark.MarkNum.None; m++)
             {
-                for (TicTacToeMark.MarkNum m = TicTacToeMark.MarkNum.Circle; m < TicTacToeMark.MarkNum.None; m++)
+                int markCount;
+
+                // 左上から右下をチェック
+                markCount = 0;
+                for (int i = 0; i < ROW_SIZE; i++)
                 {
-                    int markCount;
+                    if (board[i, i] != m)
+                    {
+                        break;
+                    }
+                    markCount++;
+                }
+                if (markCount == ROW_SIZE)
+                {
+                    return Tuple.Create(true, m);
+                }
 
-                    // 左上から右下をチェック
-                    markCount = 0;
-                    for (int i = 0; i < ROW_SIZE; i++)
+                // 右上から左下をチェック
+                markCount = 0;
+                for (int i = 0; i < ROW_SIZE; i++)
+                {
+                    if (board[i, ROW_SIZE - (i + 1)] != m)
                     {
-                        if (Board[i, i] != m)
-                        {
-                            break;
-                        }
-                        markCount++;
+                        break;
                     }
-                    if (markCount == ROW_SIZE)
-                    {
-                        Turn = TicTacToeMark.MarkNum.None;
-                        statement = m.ToString() + " WON!";
-                        return Tuple.Create(true, m);
-                    }
-
-                    // 右上から左下をチェック
-                    markCount = 0;
-                    for (int i = 0; i < ROW_SIZE; i++)
-                    {
-                        if (Board[i, ROW_SIZE - (i + 1)] != m)
-                        {
-                            break;
-                        }
-                        markCount++;
-                    }
-                    if (markCount == ROW_SIZE)
-                    {
-                        Turn = TicTacToeMark.MarkNum.None;
-                        statement = m.ToString() + " WON!";
-                        return Tuple.Create(true, m);
-                    }
+                    markCount++;
+                }
+                if (markCount == ROW_SIZE)
+                {
+                    return Tuple.Create(true, m);
                 }
             }
 
-            // 全部埋まっているか判定
+            return Tuple.Create(false, TicTacToeMark.MarkNum.None);
+        }
+
+        /// <summary>
+        /// 盤面が全て埋まっているか
+        /// </summary>
+        /// <param name="board">盤面情報</param>
+        /// <returns>
+        /// true : 全て埋まっている
+        /// false : 埋まっていないマスがある
+        /// </returns>
+        private static bool IsFilledBoard(TicTacToeMark.MarkNum[,] board)
+        {
             for (int i = 0; i < ROW_SIZE; i++)
             {
                 for (int j = 0; j < COLUMN_SIZE; j++)
                 {
                     // 埋まっていないマスがある
-                    if (Board[i, j] == TicTacToeMark.MarkNum.None)
+                    if (board[i, j] == TicTacToeMark.MarkNum.None)
                     {
-                        statement = "Game continues";
-                        return Tuple.Create(false, TicTacToeMark.MarkNum.None);
+                        return false;
                     }
                 }
             }
-
-            // 全部埋まっているので、ゲームは引き分け
-            statement = "Draw Game.";
-            return Tuple.Create(true, TicTacToeMark.MarkNum.None);
+            // 埋まっていないマスはなかった
+            return true;
         }
     }
 }
