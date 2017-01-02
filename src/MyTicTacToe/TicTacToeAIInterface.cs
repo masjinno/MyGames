@@ -10,7 +10,7 @@ namespace MyTicTacToe
     /// TicTacToeのAIインターフェース。
     /// staticなクラスとして実装されることを想定する。
     /// </summary>
-    interface ITicTacToeAIInterface
+    interface ITicTacToeAI
     {
         /// <summary>
         /// boardDataに対して、markを打つ場所を返す静的メソッドのインターフェース
