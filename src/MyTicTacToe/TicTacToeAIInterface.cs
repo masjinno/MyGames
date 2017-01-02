@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyTicTacToe
 {
-    interface TicTacToeAIInterface
+    interface ITicTacToeAIInterface
     {
         Tuple<int, int> PutMark(TicTacToeLogic.TicTacToeMark.MarkNum[,] boardData, TicTacToeLogic.TicTacToeMark.MarkNum mark);
     }
