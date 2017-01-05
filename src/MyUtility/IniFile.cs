@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace MyUtility
@@ -11,7 +8,7 @@ namespace MyUtility
     /// 参考にしたサイト
     ///   URL: https://gist.github.com/katabamisan/5231237
     /// </summary>
-    class IniFile
+    public class IniFile
     {
         /// <summary>
         /// Iniファイルの指定されたセクション内にある指定されたキーに関連づけられている文字列を取得する
