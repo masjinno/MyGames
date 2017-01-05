@@ -34,7 +34,7 @@ namespace MyGames
         /// <summary>
         /// ゲームイメージのデフォルト
         /// </summary>
-        Image DefaultGameImage;
+        ImageSource DefaultGameImageSource;
 
         /// <summary>
         /// コンストラクタ
@@ -60,8 +60,7 @@ namespace MyGames
             // Executeボタン初期化
             execute_Button.IsEnabled = false;
             // デフォルトイメージ設定
-            DefaultGameImage = new Image();
-            DefaultGameImage.Source = game_Image.Source;
+            DefaultGameImageSource = game_Image.Source;
         }
 
         /// <summary>
@@ -176,7 +175,7 @@ namespace MyGames
             {
                 execute_Button.IsEnabled = false;
                 description_TextBox.Text = "No Description";
-                game_Image.Source = DefaultGameImage.Source;
+                game_Image.Source = DefaultGameImageSource;
             }
         }
     }
