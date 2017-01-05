@@ -159,6 +159,11 @@ namespace MyGames
             }
         }
 
+        /// <summary>
+        /// 選択ゲームリストが変更
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gameList_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (gameList_ListBox.SelectedIndex != -1)
