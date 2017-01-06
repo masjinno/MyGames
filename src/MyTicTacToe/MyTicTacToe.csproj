@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="TicTacToeAIInterface.cs" />
+    <Compile Include="TicTacToeAIRandom.cs" />
     <Compile Include="TicTacToeData.cs" />
     <Compile Include="TicTacToeLogic.cs" />
     <Page Include="MainWindow.xaml">
