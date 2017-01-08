@@ -19,6 +19,11 @@ namespace MyTicTacToe
         /// </returns>
         public Tuple<int, int> PutMark(TicTacToeLogic.TicTacToeMark.MarkNum[,] boardData, TicTacToeLogic.TicTacToeMark.MarkNum mark)
         {
+            if (mark == TicTacToeLogic.TicTacToeMark.MarkNum.None)
+            {
+                return Tuple.Create<int, int>(-1, -1);
+            }
+
             Tuple<int, int>[] emptyCellArray = new Tuple<int, int>[TicTacToeLogic.ROW_SIZE * TicTacToeLogic.COLUMN_SIZE];
 
             int cntEmptyCells;
