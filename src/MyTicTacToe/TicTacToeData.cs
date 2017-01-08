@@ -66,6 +66,15 @@ namespace MyTicTacToe
         }
 
         /// <summary>
+        /// 盤面データゲッタ
+        /// </summary>
+        /// <returns>盤面データ</returns>
+        public TicTacToeLogic.TicTacToeMark.MarkNum[,] GetBoard()
+        {
+            return Board;
+        }
+
+        /// <summary>
         /// Board Setter.
         /// </summary>
         /// <param name="x">横x番目(0～ROW_SIZE-1)</param>
