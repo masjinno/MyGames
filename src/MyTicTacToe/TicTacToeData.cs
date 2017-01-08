@@ -13,11 +13,11 @@ namespace MyTicTacToe
         /// <summary>
         /// 盤面。
         /// +-----+-----+-----+
-        /// |[0,0]|[0,1]|[0,2]|  ROW 0
+        /// |[0,0]|[1,0]|[2,0]|  ROW 0
         /// +-----+-----+-----+
-        /// |[1,0]|[1,1]|[1,2]|  ROW 1
+        /// |[0,1]|[1,1]|[2,1]|  ROW 1
         /// +-----+-----+-----+
-        /// |[2,0]|[2,1]|[2,2]|  ROW 2
+        /// |[0,2]|[1,2]|[2,2]|  ROW 2
         /// +-----+-----+-----+
         ///  COL 0 COL 1 COL 2
         /// </summary>
@@ -42,7 +42,7 @@ namespace MyTicTacToe
         // コンストラクタ
         public TicTacToeData(int row_size, int column_size)
         {
-            Board = new TicTacToeLogic.TicTacToeMark.MarkNum[row_size, column_size];
+            Board = new TicTacToeLogic.TicTacToeMark.MarkNum[column_size, row_size];
 
             ResetGame();
         }
@@ -55,36 +55,36 @@ namespace MyTicTacToe
         /// <returns>Board[y,x]</returns>
         public TicTacToeLogic.TicTacToeMark.MarkNum GetBoardXY(int x, int y)
         {
-            if ((0 <= x && x < TicTacToeLogic.COLUMN_SIZE) || (0 <= y && y < TicTacToeLogic.ROW_SIZE))
+            if ((0 <= x && x < TicTacToeLogic.ROW_SIZE) || (0 <= y && y < TicTacToeLogic.COLUMN_SIZE))
             {
-                statement = "GetBoardXY(): ERROR. Arg x or y is WRONG. (0-x-" + TicTacToeLogic.COLUMN_SIZE + ", 0-y-" + TicTacToeLogic.ROW_SIZE + ")";
+                statement = "GetBoardXY(): ERROR. Arg x or y is WRONG. (0-x-" + TicTacToeLogic.ROW_SIZE + ", 0-y-" + TicTacToeLogic.COLUMN_SIZE + ")";
                 return TicTacToeLogic.TicTacToeMark.MarkNum.None;
             }
 
             statement = "";
-            return Board[y, x];
+            return Board[x, y];
         }
 
         /// <summary>
         /// Board Setter.
         /// </summary>
-        /// <param name="x">横x番目(0～COLUMN_SIZE-1)</param>
-        /// <param name="y">縦y番目(0～ROW_SIZE-1)</param>
+        /// <param name="x">横x番目(0～ROW_SIZE-1)</param>
+        /// <param name="y">縦y番目(0～COLUMN_SIZE-1)</param>
         /// <returns>
         /// true: 入力成功
         /// false: 入力失敗
         /// </returns>
         public bool SetBoardXY(int x, int y)
         {
-            if (Board[y, x] == TicTacToeLogic.TicTacToeMark.MarkNum.None)
+            if (Board[x, y] == TicTacToeLogic.TicTacToeMark.MarkNum.None)
             {
-                Board[y, x] = Turn;
+                Board[x, y] = Turn;
                 statement = "";
                 return true;
             }
             else
             {
-                statement = "There is " + Board[y, x].ToString();
+                statement = "There is " + Board[x, y].ToString();
                 return false;
             }
         }
@@ -122,9 +122,9 @@ namespace MyTicTacToe
         /// </summary>
         public void ResetGame()
         {
-            for (int i = 0; i < TicTacToeLogic.ROW_SIZE; i++)
+            for (int i = 0; i < TicTacToeLogic.COLUMN_SIZE; i++)
             {
-                for (int j = 0; j < TicTacToeLogic.COLUMN_SIZE; j++)
+                for (int j = 0; j < TicTacToeLogic.ROW_SIZE; j++)
                 {
                     Board[i, j] = TicTacToeLogic.TicTacToeMark.MarkNum.None;
                 }
