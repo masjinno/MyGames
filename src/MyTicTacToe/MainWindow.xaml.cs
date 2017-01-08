@@ -37,6 +37,11 @@ namespace MyTicTacToe
         TicTacToeData ticTacToeData;
 
         /// <summary>
+        /// 盤面とボタンの関連付け
+        /// </summary>
+        Button[,] boardCellButtons;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainWindow()
@@ -45,6 +50,12 @@ namespace MyTicTacToe
 
             ticTacToeData = new TicTacToeData(TicTacToeLogic.ROW_SIZE, TicTacToeLogic.COLUMN_SIZE);
             ResetGame();
+            boardCellButtons = new Button[,]
+            {
+                { board00_Button, board01_Button, board02_Button},
+                { board10_Button, board11_Button, board12_Button},
+                { board20_Button, board21_Button, board22_Button}
+            };
         }
 
         private void ResetGame()
@@ -66,8 +77,9 @@ namespace MyTicTacToe
         /// <summary>
         /// ボタン押下に伴う盤面更新処理
         /// </summary>
-        /// <param name="b">押されたボタン</param>
-        private void BoardUpdate(Button b, int x, int y)
+        /// <param name="x">x位置</param>
+        /// <param name="y">y位置</param>
+        private void BoardUpdate(int x, int y)
         {
             // ゲーム中でない場合は何もしない
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.None)
@@ -87,7 +99,7 @@ namespace MyTicTacToe
             if (bSetBoardSuccess)
             {
                 // 入力に応じて盤面更新
-                b.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(ticTacToeData.GetTurn());
+                boardCellButtons[x,y].Content = TicTacToeLogic.TicTacToeMark.GetMarkString(ticTacToeData.GetTurn());
 
                 var gameFinish = ticTacToeData.IsFinishedGame();
 
@@ -152,47 +164,74 @@ namespace MyTicTacToe
 
         private void board00_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board00_Button, 0, 0);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(0, 0);
+            }
         }
 
         private void board01_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board01_Button, 0, 1);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(0, 1);
+            }
         }
 
         private void board02_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board02_Button, 0, 2);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(0, 2);
+            }
         }
 
         private void board10_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board10_Button, 1, 0);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(1, 0);
+            }
         }
 
         private void board11_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board11_Button, 1, 1);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(1, 1);
+            }
         }
 
         private void board12_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board12_Button, 1, 2);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(1, 2);
+            }
         }
 
         private void board20_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board20_Button, 2, 0);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(2, 0);
+            }
         }
 
         private void board21_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board21_Button, 2, 1);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(2, 1);
+            }
         }
 
         private void board22_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board22_Button, 2, 2);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(2, 2);
+            }
         }
     }
 }
