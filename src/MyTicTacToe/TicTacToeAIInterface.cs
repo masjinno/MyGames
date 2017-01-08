@@ -8,12 +8,11 @@ namespace MyTicTacToe
 {
     /// <summary>
     /// TicTacToeのAIインターフェース。
-    /// staticなクラスとして実装されることを想定する。
     /// </summary>
     interface ITicTacToeAI
     {
         /// <summary>
-        /// boardDataに対して、markを打つ場所を返す静的メソッドのインターフェース
+        /// boardDataに対して、markを打つ場所を返すメソッドのインターフェース
         /// </summary>
         /// <param name="boardData">盤面データ</param>
         /// <param name="mark">打つマーク</param>

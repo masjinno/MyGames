@@ -37,19 +37,54 @@ namespace MyTicTacToe
         TicTacToeData ticTacToeData;
 
         /// <summary>
+        /// 盤面とボタンの関連付け
+        /// </summary>
+        Button[,] boardCellButtons;
+
+        /// <summary>
+        /// AI管理
+        /// </summary>
+        AIManager aiManager;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
 
+            // ゲーム根幹設定初期化
             ticTacToeData = new TicTacToeData(TicTacToeLogic.ROW_SIZE, TicTacToeLogic.COLUMN_SIZE);
             ResetGame();
+            boardCellButtons = new Button[,]
+            {
+                { board00_Button, board01_Button, board02_Button},
+                { board10_Button, board11_Button, board12_Button},
+                { board20_Button, board21_Button, board22_Button}
+            };
+
+            // 打ち手設定リセット
+            aiManager = new AIManager();
+            foreach (string s in aiManager.GetAiNames())
+            {
+                playerCircle_ComboBox.Items.Add(s);
+                playerCross_ComboBox.Items.Add(s);
+            }
+            aiManager.IsEnabled = false;    // ゲーム開始時は人間プレイの設定のためAI無効。AIプレイ設定に変わるのはコンボボックス操作時。
+            playCircle_Button.IsEnabled = false;
+            playCross_Button.IsEnabled = false;
+            playerCircle_ComboBox.SelectedIndex = 0;
+            playerCross_ComboBox.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// ゲーム初期化処理
+        /// </summary>
         private void ResetGame()
         {
             if (ticTacToeData == null) return;
+
+            // ゲーム根幹設定リセット
             ticTacToeData.ResetGame();
             board00_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
             board01_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
@@ -66,8 +101,9 @@ namespace MyTicTacToe
         /// <summary>
         /// ボタン押下に伴う盤面更新処理
         /// </summary>
-        /// <param name="b">押されたボタン</param>
-        private void BoardUpdate(Button b, int x, int y)
+        /// <param name="x">x位置</param>
+        /// <param name="y">y位置</param>
+        private void BoardUpdate(int x, int y)
         {
             // ゲーム中でない場合は何もしない
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.None)
@@ -87,7 +123,7 @@ namespace MyTicTacToe
             if (bSetBoardSuccess)
             {
                 // 入力に応じて盤面更新
-                b.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(ticTacToeData.GetTurn());
+                boardCellButtons[x,y].Content = TicTacToeLogic.TicTacToeMark.GetMarkString(ticTacToeData.GetTurn());
 
                 var gameFinish = ticTacToeData.IsFinishedGame();
 
@@ -105,6 +141,7 @@ namespace MyTicTacToe
                     // ゲーム続行
                     ticTacToeData.ContinueGame();
                     SetTurnVisiblity();
+                    SetPlayers();
                 }
             }
         }
@@ -127,72 +164,165 @@ namespace MyTicTacToe
         }
 
 
+        private void SetPlayers()
+        {
+            SetPlayerCircle();
+            SetPlayerCross();
+        }
+        
+        private void SetPlayerCircle()
+        {
+            if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Circle)
+            {
+                playCircle_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
+                // ボタンは常に有効。AIプレイ時は、押下しても反応しない設定。
+                //board00_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board01_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board02_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board10_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board11_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board12_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board20_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board21_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                //board22_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                aiManager.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+            }
+            else
+            {
+                playCircle_Button.IsEnabled = false;
+            }
+        }
+
+
+        private void SetPlayerCross()
+        {
+            if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Cross)
+            {
+                playCross_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
+                // ボタンは常に有効。AIプレイ時は、押下しても反応しない設定。
+                //board00_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board01_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board02_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board10_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board11_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board12_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board20_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board21_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                //board22_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                aiManager.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+            }
+            else
+            {
+                playCross_Button.IsEnabled = false;
+            }
+        }
+
+
         // 以下、イベントハンドラ
 
         /// <summary>
-        /// ボタンクリックイベント
+        /// リセットボタンクリックイベント
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void reset_Button_Click(object sender, RoutedEventArgs e)
         {
             if (ticTacToeData == null) return;
-            ticTacToeData.ResetGame();
-            board00_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board01_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board02_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board10_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board11_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board12_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board20_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board21_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            board22_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
-            SetTurnVisiblity();
+            ResetGame();
         }
 
         private void board00_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board00_Button, 0, 0);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(0, 0);
+            }
         }
 
         private void board01_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board01_Button, 0, 1);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(0, 1);
+            }
         }
 
         private void board02_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board02_Button, 0, 2);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(0, 2);
+            }
         }
 
         private void board10_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board10_Button, 1, 0);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(1, 0);
+            }
         }
 
         private void board11_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board11_Button, 1, 1);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(1, 1);
+            }
         }
 
         private void board12_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board12_Button, 1, 2);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(1, 2);
+            }
         }
 
         private void board20_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board20_Button, 2, 0);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(2, 0);
+            }
         }
 
         private void board21_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board21_Button, 2, 1);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(2, 1);
+            }
         }
 
         private void board22_Button_Click(object sender, RoutedEventArgs e)
         {
-            BoardUpdate(board22_Button, 2, 2);
+            if (aiManager.IsEnabled)
+            {
+                BoardUpdate(2, 2);
+            }
+        }
+
+        private void playerCircle_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetPlayerCircle();
+        }
+
+        private void playerCross_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetPlayerCross();
+        }
+
+        private void playCircle_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Tuple<int,int> result = aiManager.GetAiPutPlace(playerCircle_ComboBox.SelectedIndex - 1, ticTacToeData);
+            BoardUpdate(result.Item1, result.Item2);
+        }
+
+        private void playCross_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Tuple<int, int> result = aiManager.GetAiPutPlace(playerCross_ComboBox.SelectedIndex - 1, ticTacToeData);
+            BoardUpdate(result.Item1, result.Item2);
         }
     }
 }
