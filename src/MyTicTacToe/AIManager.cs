@@ -11,7 +11,7 @@ namespace MyTicTacToe
         /// <summary>
         /// AI名
         /// </summary>
-        private string[] aiNames = { "AI:Random1", "AI:Random2" };
+        private string[] aiNames = { "AI:Random", "AI:NextMove" };
 
         /// <summary>
         /// AI実態
@@ -34,7 +34,7 @@ namespace MyTicTacToe
             TicTacToeAI = new ITicTacToeAI[]
             {
                 new TicTacToeAIRandom(),
-                new TicTacToeAIRandom()
+                new TicTacToeAINextMove()
             };
             IsEnabled = false;
         }
