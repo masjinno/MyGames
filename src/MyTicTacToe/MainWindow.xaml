@@ -89,5 +89,7 @@
         </ComboBox>
         <Button x:Name="playCircle_Button" Content="PLAY" HorizontalAlignment="Left" Margin="20,182,0,0" VerticalAlignment="Top" Width="100" Click="playCircle_Button_Click"/>
         <Button x:Name="playCross_Button" Content="PLAY" HorizontalAlignment="Right" Margin="0,182,20,0" VerticalAlignment="Top" Width="100" Click="playCross_Button_Click"/>
+        <CheckBox x:Name="autoPlayCircle_CheckBox" Content="Auto Play" HorizontalAlignment="Left" Margin="20,211,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="autoPlayCross_CheckBox" Content="Auto Play" HorizontalAlignment="Left" Margin="512,211,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
