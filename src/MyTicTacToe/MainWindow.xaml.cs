@@ -75,6 +75,10 @@ namespace MyTicTacToe
             playCross_Button.IsEnabled = false;
             playerCircle_ComboBox.SelectedIndex = 0;
             playerCross_ComboBox.SelectedIndex = 0;
+            autoPlayCircle_CheckBox.IsChecked = false;
+            autoPlayCross_CheckBox.IsChecked = false;
+            autoPlayCircle_CheckBox.IsEnabled = false;
+            autoPlayCross_CheckBox.IsEnabled = false;
         }
 
         /// <summary>
@@ -191,6 +195,11 @@ namespace MyTicTacToe
                 //board21_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
                 //board22_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
                 aiManager.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                autoPlayCircle_CheckBox.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
+                if (autoPlayCircle_CheckBox.IsChecked == true)
+                {
+                    PutCircleAI();
+                }
             }
             else
             {
@@ -217,6 +226,11 @@ namespace MyTicTacToe
                 //board21_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
                 //board22_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
                 aiManager.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                autoPlayCross_CheckBox.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
+                if (autoPlayCross_CheckBox.IsChecked == true)
+                {
+                    PutCrossAI();
+                }
             }
             else
             {
