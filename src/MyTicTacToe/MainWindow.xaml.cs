@@ -224,6 +224,24 @@ namespace MyTicTacToe
             }
         }
 
+        /// <summary>
+        /// AI先手
+        /// </summary>
+        private void PutCircleAI()
+        {
+            Tuple<int, int> result = aiManager.GetAiPutPlace(playerCircle_ComboBox.SelectedIndex - 1, ticTacToeData);
+            BoardUpdate(result.Item1, result.Item2);
+        }
+
+        /// <summary>
+        /// AI後手
+        /// </summary>
+        private void PutCrossAI()
+        {
+            Tuple<int, int> result = aiManager.GetAiPutPlace(playerCross_ComboBox.SelectedIndex - 1, ticTacToeData);
+            BoardUpdate(result.Item1, result.Item2);
+        }
+
 
         // 以下、イベントハンドラ
 
@@ -322,14 +340,12 @@ namespace MyTicTacToe
 
         private void playCircle_Button_Click(object sender, RoutedEventArgs e)
         {
-            Tuple<int,int> result = aiManager.GetAiPutPlace(playerCircle_ComboBox.SelectedIndex - 1, ticTacToeData);
-            BoardUpdate(result.Item1, result.Item2);
+            PutCircleAI();
         }
 
         private void playCross_Button_Click(object sender, RoutedEventArgs e)
         {
-            Tuple<int, int> result = aiManager.GetAiPutPlace(playerCross_ComboBox.SelectedIndex - 1, ticTacToeData);
-            BoardUpdate(result.Item1, result.Item2);
+            PutCrossAI();
         }
     }
 }
