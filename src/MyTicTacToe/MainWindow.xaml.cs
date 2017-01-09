@@ -175,16 +175,6 @@ namespace MyTicTacToe
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Circle)
             {
                 playCircle_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
-                // ボタンは常に有効。AIプレイ時は、押下しても反応しない設定。
-                //board00_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board01_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board02_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board10_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board11_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board12_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board20_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board21_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                //board22_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
                 aiManager.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
             }
             else
@@ -199,16 +189,6 @@ namespace MyTicTacToe
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Cross)
             {
                 playCross_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
-                // ボタンは常に有効。AIプレイ時は、押下しても反応しない設定。
-                //board00_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board01_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board02_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board10_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board11_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board12_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board20_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board21_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                //board22_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
                 aiManager.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
             }
             else
