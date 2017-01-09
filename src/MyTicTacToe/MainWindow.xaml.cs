@@ -163,13 +163,18 @@ namespace MyTicTacToe
             }
         }
 
-
+        /// <summary>
+        /// 手番に対応した先手後手の打ち手情報を設定する。
+        /// </summary>
         private void SetPlayers()
         {
             SetPlayerCircle();
             SetPlayerCross();
         }
-        
+
+        /// <summary>
+        /// 手番に対応した先手の打ち手情報を設定する。
+        /// </summary>
         private void SetPlayerCircle()
         {
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Circle)
@@ -193,7 +198,9 @@ namespace MyTicTacToe
             }
         }
 
-
+        /// <summary>
+        /// 手番に対応した後手の打ち手情報を設定する。
+        /// </summary>
         private void SetPlayerCross()
         {
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Cross)
