@@ -75,6 +75,10 @@ namespace MyTicTacToe
             playCross_Button.IsEnabled = false;
             playerCircle_ComboBox.SelectedIndex = 0;
             playerCross_ComboBox.SelectedIndex = 0;
+            autoPlayCircle_CheckBox.IsChecked = false;
+            autoPlayCross_CheckBox.IsChecked = false;
+            autoPlayCircle_CheckBox.IsEnabled = false;
+            autoPlayCross_CheckBox.IsEnabled = false;
         }
 
         /// <summary>
@@ -163,19 +167,29 @@ namespace MyTicTacToe
             }
         }
 
-
+        /// <summary>
+        /// 手番に対応した先手後手の打ち手情報を設定する。
+        /// </summary>
         private void SetPlayers()
         {
             SetPlayerCircle();
             SetPlayerCross();
         }
-        
+
+        /// <summary>
+        /// 手番に対応した先手の打ち手情報を設定する。
+        /// </summary>
         private void SetPlayerCircle()
         {
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Circle)
             {
                 playCircle_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
                 aiManager.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
+                autoPlayCircle_CheckBox.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
+                if (autoPlayCircle_CheckBox.IsChecked == true)
+                {
+                    PutCircleAI();
+                }
             }
             else
             {
@@ -183,18 +197,43 @@ namespace MyTicTacToe
             }
         }
 
-
+        /// <summary>
+        /// 手番に対応した後手の打ち手情報を設定する。
+        /// </summary>
         private void SetPlayerCross()
         {
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Cross)
             {
                 playCross_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
                 aiManager.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
+                autoPlayCross_CheckBox.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
+                if (autoPlayCross_CheckBox.IsChecked == true)
+                {
+                    PutCrossAI();
+                }
             }
             else
             {
                 playCross_Button.IsEnabled = false;
             }
+        }
+
+        /// <summary>
+        /// AI先手
+        /// </summary>
+        private void PutCircleAI()
+        {
+            Tuple<int, int> result = aiManager.GetAiPutPlace(playerCircle_ComboBox.SelectedIndex - 1, ticTacToeData);
+            BoardUpdate(result.Item1, result.Item2);
+        }
+
+        /// <summary>
+        /// AI後手
+        /// </summary>
+        private void PutCrossAI()
+        {
+            Tuple<int, int> result = aiManager.GetAiPutPlace(playerCross_ComboBox.SelectedIndex - 1, ticTacToeData);
+            BoardUpdate(result.Item1, result.Item2);
         }
 
 
@@ -295,14 +334,12 @@ namespace MyTicTacToe
 
         private void playCircle_Button_Click(object sender, RoutedEventArgs e)
         {
-            Tuple<int,int> result = aiManager.GetAiPutPlace(playerCircle_ComboBox.SelectedIndex - 1, ticTacToeData);
-            BoardUpdate(result.Item1, result.Item2);
+            PutCircleAI();
         }
 
         private void playCross_Button_Click(object sender, RoutedEventArgs e)
         {
-            Tuple<int, int> result = aiManager.GetAiPutPlace(playerCross_ComboBox.SelectedIndex - 1, ticTacToeData);
-            BoardUpdate(result.Item1, result.Item2);
+            PutCrossAI();
         }
     }
 }
