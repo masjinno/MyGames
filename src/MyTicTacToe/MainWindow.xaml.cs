@@ -55,7 +55,6 @@ namespace MyTicTacToe
 
             // ゲーム根幹設定初期化
             ticTacToeData = new TicTacToeData(TicTacToeLogic.ROW_SIZE, TicTacToeLogic.COLUMN_SIZE);
-            ResetGame();
             boardCellButtons = new Button[,]
             {
                 { board00_Button, board01_Button, board02_Button},
@@ -79,6 +78,9 @@ namespace MyTicTacToe
             autoPlayCross_CheckBox.IsChecked = false;
             autoPlayCircle_CheckBox.IsEnabled = false;
             autoPlayCross_CheckBox.IsEnabled = false;
+
+            // ゲーム開始状態にセット
+            ResetGame();
         }
 
         /// <summary>
@@ -100,6 +102,9 @@ namespace MyTicTacToe
             board21_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
             board22_Button.Content = TicTacToeLogic.TicTacToeMark.GetMarkString(TicTacToeLogic.TicTacToeMark.MarkNum.None);
             SetTurnVisiblity();
+
+            // 打ち手情報リセット
+            SetPlayers();
         }
 
         /// <summary>
