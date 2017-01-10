@@ -186,11 +186,11 @@ namespace MyTicTacToe
         /// </summary>
         private void SetPlayerCircle()
         {
+            autoPlayCircle_CheckBox.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Circle)
             {
                 playCircle_Button.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
                 aiManager.IsEnabled = (playerCircle_ComboBox.SelectedIndex == 0);
-                autoPlayCircle_CheckBox.IsEnabled = (playerCircle_ComboBox.SelectedIndex >= 1);
                 if (autoPlayCircle_CheckBox.IsChecked == true)
                 {
                     PutCircleAI();
@@ -207,11 +207,11 @@ namespace MyTicTacToe
         /// </summary>
         private void SetPlayerCross()
         {
+            autoPlayCross_CheckBox.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
             if (ticTacToeData.GetTurn() == TicTacToeLogic.TicTacToeMark.MarkNum.Cross)
             {
                 playCross_Button.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
                 aiManager.IsEnabled = (playerCross_ComboBox.SelectedIndex == 0);
-                autoPlayCross_CheckBox.IsEnabled = (playerCross_ComboBox.SelectedIndex >= 1);
                 if (autoPlayCross_CheckBox.IsChecked == true)
                 {
                     PutCrossAI();
