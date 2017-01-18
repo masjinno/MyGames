@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.IO;
 
-namespace MyGames
+namespace MyGames.Model
 {
     class GameInfo
     {

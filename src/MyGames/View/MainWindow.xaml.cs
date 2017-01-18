@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 
+using MyGames.Model;    //ビルドを通すために、暫定的に追加
+
 namespace MyGames
 {
     /// <summary>
@@ -45,7 +47,7 @@ namespace MyGames
             InitializeComponent();
 
             // メンバ変数初期化
-            gamesInfo = new MyGames.GamesInfo();
+            gamesInfo = new GamesInfo();
             IsClosed = false;
             
             // GUI初期化

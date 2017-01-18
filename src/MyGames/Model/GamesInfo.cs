@@ -10,7 +10,7 @@ using System.IO;
 
 using MyUtility;
 
-namespace MyGames
+namespace MyGames.Model
 {
     /// <summary>
     /// ランチャープログラムが呼び出す実行ファイル情報など
