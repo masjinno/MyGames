@@ -13,5 +13,16 @@ namespace MyGames
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// MyGamesスタートアップ。
+        /// App.xamlで指定する。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var v = new MainWindow();
+            v.Show();
+        }
     }
 }
