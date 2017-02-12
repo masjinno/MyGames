@@ -22,8 +22,8 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Margin="5"/>
-            <Image Margin="5"/>
+            <ListBox Margin="5" Grid.Column="0"/>
+            <Image Margin="5" Grid.Column="1"/>
         </Grid>
     </DockPanel>
 </Window>
