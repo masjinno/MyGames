@@ -78,6 +78,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\GameInfo.cs" />
+    <Compile Include="Model\GamesInfoM.cs" />
+    <Compile Include="ViewModel\GamesInfoVM.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -112,8 +115,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
+    <ProjectReference Include="..\MyUtility\MyUtility.csproj">
+      <Project>{684bcf62-61d4-47f0-81af-2d4112f27383}</Project>
+      <Name>MyUtility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\NoImage.png" />
