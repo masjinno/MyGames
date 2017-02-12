@@ -14,7 +14,7 @@
             <Button DockPanel.Dock="Right" Content="Quit" Width="100" Margin="5"/>
             <Button DockPanel.Dock="Right" Content="Execute" Width="100" Margin="5"/>
         </DockPanel>
-        <Grid DockPanel.Dock="Bottom" MaxHeight="70">
+        <Grid DockPanel.Dock="Bottom" Height="70">
             <TextBox DockPanel.Dock="Right" Text="Description" Margin="5" IsReadOnly="False" TextWrapping="Wrap"/>
         </Grid>
         <Grid>
