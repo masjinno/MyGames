@@ -64,7 +64,7 @@ namespace MyUtility
 
 
         /// <summary>
-        /// 指定のセクションが持つキーの個数を返す
+        /// 指定のセクションが持つキーを配列として返す
         /// ※特定のキー名に限定する
         /// </summary>
         /// <param name="lpAppName">セクション名</param>
@@ -89,8 +89,9 @@ namespace MyUtility
                 } while (copied + 2 == length);
                 return Marshal.PtrToStringAuto(buf, copied - 1).Split('\0');
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
+                // 処理中に引数例外が発生した場合は、指定セクション内にキーなしとみなしてnullを返す
                 return null;
             }
             finally
