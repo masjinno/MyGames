@@ -10,12 +10,34 @@ namespace MyGames.ViewModel
 {
     class GamesInfoVM : BindableBase
     {
+        #region GamesInfoVM
+
+        /// <summary>
+        /// ゲーム説明
+        /// </summary>
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                SetProperty(ref _description, value);
+            }
+        }
+
+        #endregion
+
+        #region MV内部処理用プロパティ
         /// <summary>
         /// 起動可能なゲームのリストのデフォルト値。
         /// 設定ファイルが存在しなかった場合、これを適用する。
         /// </summary>
-        GamesInfoM gamesInfoModel;
-        
+        private GamesInfoM gamesInfoModel { get; set; }
+        #endregion
+
         /// <summary>
         /// GamesInfoコンストラクタ
         /// </summary>
@@ -24,7 +46,7 @@ namespace MyGames.ViewModel
             gamesInfoModel = new GamesInfoM();
 
             // 読み込んだゲーム数を格納する
-            int numGames = 0;
+            int numGames;
 
             // 設定ファイルロード
             numGames = gamesInfoModel.LoadConfigFile();
