@@ -4,18 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyGames"
+        xmlns:vm="clr-namespace:MyGames.ViewModel"
         mc:Ignorable="d"
-        Title="My Games" Height="350" Width="525">
+        Title="My Games" Width="525" Height="350">
+    <Window.DataContext>
+        <vm:GamesInfoVM/>
+    </Window.DataContext>
     <DockPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <Grid DockPanel.Dock="Top">
-            <TextBlock x:Name="message_TextBlock" Margin="5" Text="Choose a game you want to play." VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0,0"/>
+            <TextBlock Margin="5" Text="Choose a game you want to play." VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0,0"/>
         </Grid>
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
             <Button DockPanel.Dock="Right" Content="Quit" Width="100" Margin="5"/>
             <Button DockPanel.Dock="Right" Content="Execute" Width="100" Margin="5"/>
         </DockPanel>
         <Grid DockPanel.Dock="Bottom" Height="70">
-            <TextBox DockPanel.Dock="Right" Text="Description" Margin="5" IsReadOnly="False" TextWrapping="Wrap"/>
+            <TextBox DockPanel.Dock="Right"
+                     Text="{Binding Path=Description}"
+                     Margin="5"
+                     IsReadOnly="False"
+                     TextWrapping="Wrap"/>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
