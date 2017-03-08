@@ -96,13 +96,13 @@ namespace MyGames.Model
             else
             {
                 // デフォルトイメージのパス(2択)
-                if (File.Exists(@"..\..\NoImage.png"))
+                if (File.Exists(@"..\..\Resources\NoImage.png"))
                 {
-                    this.SampleImagePath = @"..\..\NoImage.png";
+                    this.SampleImagePath = @"..\..\Resources\NoImage.png";
                 }
                 else
                 {
-                    this.SampleImagePath = @".\Games\NoImage.png";
+                    this.SampleImagePath = @".\NoImage.png";
                 }
             }
 
