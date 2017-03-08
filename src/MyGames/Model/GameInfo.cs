@@ -74,9 +74,32 @@ namespace MyGames.Model
             string arguments = ""
             )
         {
-            // 引数格納
-            this.Name = name;
+            // ゲーム設定格納
+            SetName(name);
+            SetPath(path);
+            SetDescription(description);
+            SetSampleImagePath(imagePath);
+            SetArguments(arguments);
 
+            // 設定値をもとに使用する準備
+            CreateSampleImage();
+        }
+
+        /// <summary>
+        /// ゲーム名称設定
+        /// </summary>
+        /// <param name="name"></param>
+        private void SetName(string name)
+        {
+            this.Name = name;
+        }
+
+        /// <summary>
+        /// ゲームファイルパス設定
+        /// </summary>
+        /// <param name="path"></param>
+        private void SetPath(string path)
+        {
             if (System.IO.File.Exists(path))
             {
                 this.Path = path;
@@ -86,9 +109,23 @@ namespace MyGames.Model
                 this.Path = "";
                 System.Windows.MessageBox.Show("invalid exe path.", "Error.", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
+        }
 
+        /// <summary>
+        /// ゲーム説明設定
+        /// </summary>
+        /// <param name="description"></param>
+        private void SetDescription(string description)
+        {
             this.Description = description;
+        }
 
+        /// <summary>
+        /// ゲームサンプルイメージパス設定
+        /// </summary>
+        /// <param name="imagePath"></param>
+        private void SetSampleImagePath(string imagePath)
+        {
             if (System.IO.File.Exists(imagePath))
             {
                 this.SampleImagePath = imagePath;
@@ -105,9 +142,22 @@ namespace MyGames.Model
                     this.SampleImagePath = @".\NoImage.png";
                 }
             }
+        }
 
+        /// <summary>
+        /// ゲームファイル起動時のコマンド引数設定
+        /// </summary>
+        /// <param name="arguments"></param>
+        private void SetArguments(string arguments)
+        {
             this.Arguments = arguments;
+        }
 
+        /// <summary>
+        /// メンバのサンプルイメージパスから画像生成
+        /// </summary>
+        private void CreateSampleImage()
+        {
             try
             {
                 // SampleImage生成
