@@ -43,6 +43,22 @@ namespace MyGames.ViewModel
                 SetProperty(ref _gameNameList, value);
             }
         }
+
+        /// <summary>
+        /// ゲームインデックス
+        /// </summary>
+        private int _selectedGameIndex;
+        public int SelectedGameIndex
+        {
+            get
+            {
+                return _selectedGameIndex;
+            }
+            set
+            {
+                SetProperty(ref _selectedGameIndex, value);
+            }
+        }
         #endregion
 
         #region MV内部処理用プロパティ
