@@ -74,6 +74,14 @@ namespace MyGames.ViewModel
         /// </summary>
         public GamesInfoVM()
         {
+            Initialize();
+        }
+
+        /// <summary>
+        /// ゲーム設定の初期化
+        /// </summary>
+        private void Initialize()
+        {
             gamesInfoModel = new GamesInfoM();
 
             // 読み込んだゲーム数を格納する
