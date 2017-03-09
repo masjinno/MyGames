@@ -180,5 +180,15 @@ namespace MyGames.Model
             }
             return gameNames;
         }
+
+        /// <summary>
+        /// インデックスに対応するゲームのDescriptionを取得する
+        /// </summary>
+        /// <param name="index">インデックス</param>
+        /// <returns></returns>
+        public string GetGameDescription(int index)
+        {
+            return GamesList[index].Description;
+        }
     }
 }
