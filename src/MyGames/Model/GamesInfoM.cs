@@ -166,5 +166,19 @@ namespace MyGames.Model
 
             return;
         }
+
+        /// <summary>
+        /// ゲーム名称のリストを取得する
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetGameNames()
+        {
+            List<string> gameNames = new List<string>();
+            foreach (GameInfo gi in GamesList)
+            {
+                gameNames.Add(gi.Name);
+            }
+            return gameNames;
+        }
     }
 }
