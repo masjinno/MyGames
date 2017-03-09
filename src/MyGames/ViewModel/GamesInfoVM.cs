@@ -57,6 +57,7 @@ namespace MyGames.ViewModel
             set
             {
                 SetProperty(ref _selectedGameIndex, value);
+                SelectedGameIndexChanged(SelectedGameIndex);
             }
         }
         #endregion
@@ -94,6 +95,16 @@ namespace MyGames.ViewModel
                 // 設定ファイルロードに失敗したら、デフォルト値をロードする
                 gamesInfoModel.LoadDefaultConfig();
             }
+
+        }
+
+        /// <summary>
+        /// ゲームインデックス変更時の処理
+        /// </summary>
+        /// <param name="newGameIndex">変更後のゲームインデックス</param>
+        private void SelectedGameIndexChanged(int newGameIndex)
+        {
+            Description = gamesInfoModel.GetGameDescription(newGameIndex);
         }
     }
 }
