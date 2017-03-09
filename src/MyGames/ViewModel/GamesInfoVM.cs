@@ -96,6 +96,11 @@ namespace MyGames.ViewModel
                 gamesInfoModel.LoadDefaultConfig();
             }
 
+            // ロードした設定をプロパティに反映
+            GameNameList = gamesInfoModel.GetGameNames();
+            SelectedGameIndex = 0;
+
+            Description = gamesInfoModel.GetGameDescription(SelectedGameIndex);
         }
 
         /// <summary>
