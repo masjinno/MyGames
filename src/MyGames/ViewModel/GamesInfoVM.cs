@@ -28,6 +28,21 @@ namespace MyGames.ViewModel
             }
         }
 
+        /// <summary>
+        /// ゲーム名称一覧
+        /// </summary>
+        private List<string> _gameNameList;
+        public List<string> GameNameList
+        {
+            get
+            {
+                return _gameNameList;
+            }
+            set
+            {
+                SetProperty(ref _gameNameList, value);
+            }
+        }
         #endregion
 
         #region MV内部処理用プロパティ
