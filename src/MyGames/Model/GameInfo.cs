@@ -133,9 +133,9 @@ namespace MyGames.Model
             else
             {
                 // デフォルトイメージのパス(2択)
-                if (File.Exists(@"..\..\Resources\NoImage.png"))
+                if (File.Exists(@"..\..\Resource\NoImage.png"))
                 {
-                    this.SampleImagePath = @"..\..\Resources\NoImage.png";
+                    this.SampleImagePath = @"..\..\Resource\NoImage.png";
                 }
                 else
                 {
