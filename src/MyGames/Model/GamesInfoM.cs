@@ -200,5 +200,14 @@ namespace MyGames.Model
         {
             return GamesList[index].SampleImage;
         }
+
+        /// <summary>
+        /// ゲーム実行
+        /// </summary>
+        /// <param name="index"></param>
+        public void StartGame(int index)
+        {
+            GamesList[index].StartProgram();
+        }
     }
 }

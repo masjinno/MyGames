@@ -90,7 +90,7 @@ namespace MyGames.ViewModel
             {
                 return new DelegateCommand(() =>
                 {
-                    System.Windows.MessageBox.Show("ExecuteCommand");
+                    ExecuteGame();
                 });
             }
         }
@@ -223,6 +223,14 @@ namespace MyGames.ViewModel
             }
 
             return retImageSource;
+        }
+
+        /// <summary>
+        /// ゲーム実行
+        /// </summary>
+        private void ExecuteGame()
+        {
+            GamesInfoModel.StartGame(SelectedGameIndex);
         }
     }
 }
