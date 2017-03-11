@@ -129,16 +129,13 @@ namespace MyGames.Model
             else
             {
                 // デフォルトイメージのパス(2択)
-                string DebugRelativePath = @"..\..\Resource\NoImage.png";
-                string CopiedEnvironmentPath = @".\NoImage.png";
-
-                if (File.Exists(DebugRelativePath))
+                if (File.Exists(MyGamesSettingData.DefaultGameImageDebugPath))
                 {
-                    this.SampleImagePath = DebugRelativePath;
+                    this.SampleImagePath = MyGamesSettingData.DefaultGameImageDebugPath;
                 }
-                else if (File.Exists(CopiedEnvironmentPath))
+                else if (File.Exists(MyGamesSettingData.DefaultGameImageCopiedEnvironmentPath))
                 {
-                    this.SampleImagePath = CopiedEnvironmentPath;
+                    this.SampleImagePath = MyGamesSettingData.DefaultGameImageCopiedEnvironmentPath;
                 }
             }
         }
