@@ -46,7 +46,9 @@
                      TabIndex="0"
                      ItemsSource="{Binding Path=GameNameList}"
                      SelectedIndex="{Binding Path=SelectedGameIndex}"/>
-            <Image Margin="5" Grid.Column="1"/>
+            <Image Grid.Column="1"
+                   Margin="5"
+                   Source="{Binding Path=GameSampleImage}"/>
         </Grid>
     </DockPanel>
 </Window>
