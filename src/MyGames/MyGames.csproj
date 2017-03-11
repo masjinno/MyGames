@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Model\GameInfo.cs" />
     <Compile Include="Model\GamesInfoM.cs" />
+    <Compile Include="Resource\MyGamesSettingData.cs" />
     <Compile Include="ViewModel\GamesInfoVM.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
