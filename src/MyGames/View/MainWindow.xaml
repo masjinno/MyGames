@@ -17,11 +17,13 @@
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
             <Button DockPanel.Dock="Right"
                     Content="Quit"
+                    TabIndex="3"
                     Width="100"
                     Margin="5"
                     Command="{Binding Path=QuitCommand}"/>
             <Button DockPanel.Dock="Right"
                     Content="Execute"
+                    TabIndex="2"
                     Width="100"
                     Margin="5"
                     Command="{Binding Path=ExecuteCommand}"/>
@@ -29,6 +31,7 @@
         <Grid DockPanel.Dock="Bottom" Height="70">
             <TextBox DockPanel.Dock="Right"
                      Text="{Binding Path=Description}"
+                     TabIndex="1"
                      Margin="5"
                      IsReadOnly="False"
                      TextWrapping="Wrap"/>
@@ -40,6 +43,7 @@
             </Grid.ColumnDefinitions>
             <ListBox Grid.Column="0"
                      Margin="5"
+                     TabIndex="0"
                      ItemsSource="{Binding Path=GameNameList}"
                      SelectedIndex="{Binding Path=SelectedGameIndex}"/>
             <Image Margin="5" Grid.Column="1"/>
