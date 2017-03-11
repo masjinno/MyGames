@@ -100,7 +100,7 @@ namespace MyGames.ViewModel
         /// 起動可能なゲームのリストのデフォルト値。
         /// 設定ファイルが存在しなかった場合、これを適用する。
         /// </summary>
-        private GamesInfoM gamesInfoModel { get; set; }
+        private GamesInfoM GamesInfoModel { get; set; }
         #endregion
 
         /// <summary>
@@ -116,24 +116,25 @@ namespace MyGames.ViewModel
         /// </summary>
         private void Initialize()
         {
-            gamesInfoModel = new GamesInfoM();
+            GamesInfoModel = new GamesInfoM();
 
             // 読み込んだゲーム数を格納する
             int numGames;
 
             // 設定ファイルロード
-            numGames = gamesInfoModel.LoadConfigFile();
+            numGames = GamesInfoModel.LoadConfigFile();
             if (numGames <= 0)
             {
                 // 設定ファイルロードに失敗したら、デフォルト値をロードする
-                gamesInfoModel.LoadDefaultConfig();
+                GamesInfoModel.LoadDefaultConfig();
             }
 
             // ロードした設定をプロパティに反映
-            GameNameList = gamesInfoModel.GetGameNames();
+            GameNameList = GamesInfoModel.GetGameNames();
             SelectedGameIndex = 0;
 
-            Description = gamesInfoModel.GetGameDescription(SelectedGameIndex);
+            // ゲーム説明を初期化
+            Description = GamesInfoModel.GetGameDescription(SelectedGameIndex);
         }
 
         /// <summary>
@@ -142,7 +143,7 @@ namespace MyGames.ViewModel
         /// <param name="newGameIndex">変更後のゲームインデックス</param>
         private void SelectedGameIndexChanged(int newGameIndex)
         {
-            Description = gamesInfoModel.GetGameDescription(newGameIndex);
+            Description = GamesInfoModel.GetGameDescription(newGameIndex);
         }
     }
 }
