@@ -190,5 +190,15 @@ namespace MyGames.Model
         {
             return GamesList[index].Description;
         }
+
+        /// <summary>
+        /// インデックスに対応するゲームのサンプルイメージを取得する
+        /// </summary>
+        /// <param name="index">インデックス</param>
+        /// <returns></returns>
+        public ImageSource GetGameSampleImage(int index)
+        {
+            return GamesList[index].SampleImage;
+        }
     }
 }
