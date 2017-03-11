@@ -65,16 +65,16 @@ namespace MyGames.ViewModel
         /// <summary>
         /// ゲームのサンプルイメージ
         /// </summary>
-        private ImageSource _sampleImage;
-        public ImageSource SampleImage
+        private ImageSource _gameSampleImage;
+        public ImageSource GameSampleImage
         {
             get
             {
-                return _sampleImage;
+                return _gameSampleImage;
             }
             set
             {
-                SetProperty(ref _sampleImage, value);
+                SetProperty(ref _gameSampleImage, value);
             }
         }
         #endregion
@@ -158,7 +158,7 @@ namespace MyGames.ViewModel
             Description = GamesInfoModel.GetGameDescription(SelectedGameIndex);
 
             // ゲームサンプルイメージを初期化
-            SampleImage = LoadDefaultGameSampleImage();
+            GameSampleImage = LoadDefaultGameSampleImage();
         }
 
         /// <summary>
