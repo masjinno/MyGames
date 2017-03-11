@@ -107,7 +107,6 @@ namespace MyGames.Model
             else
             {
                 this.Path = "";
-                System.Windows.MessageBox.Show("invalid exe path.", "Error.", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -133,13 +132,16 @@ namespace MyGames.Model
             else
             {
                 // デフォルトイメージのパス(2択)
-                if (File.Exists(@"..\..\Resource\NoImage.png"))
+                string DebugRelativePath = @"..\..\Resource\NoImage.png";
+                string CopiedEnvironmentPath = @".\NoImage.png";
+
+                if (File.Exists(DebugRelativePath))
                 {
-                    this.SampleImagePath = @"..\..\Resource\NoImage.png";
+                    this.SampleImagePath = DebugRelativePath;
                 }
-                else
+                else if (File.Exists(CopiedEnvironmentPath))
                 {
-                    this.SampleImagePath = @".\NoImage.png";
+                    this.SampleImagePath = CopiedEnvironmentPath;
                 }
             }
         }
@@ -171,9 +173,13 @@ namespace MyGames.Model
                     this.SampleImage = bi;
                 }
             }
-            catch (Exception ex)
+            catch (ArgumentNullException e)
             {
-                System.Windows.MessageBox.Show(ex.ToString());
+                this.SampleImage = null;
+            }
+            catch (FileNotFoundException e)
+            {
+                this.SampleImage = null;
             }
         }
 
