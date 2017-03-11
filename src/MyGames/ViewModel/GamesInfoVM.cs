@@ -1,12 +1,11 @@
-﻿using Prism.Mvvm;
+﻿using MyGames.Model;
+using MyGames.Resource;
+using MyUtility;
+using Prism.Mvvm;
 using Prism.Commands;
-using MyGames.Model;
-using System.Windows.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace MyGames.ViewModel
 {

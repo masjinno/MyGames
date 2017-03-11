@@ -8,7 +8,7 @@ namespace MyUtility
     /// 参考にしたサイト
     ///   URL: https://gist.github.com/katabamisan/5231237
     /// </summary>
-    public class IniFile
+    public static class IniFile
     {
         /// <summary>
         /// Iniファイルの指定されたセクション内にある指定されたキーに関連づけられている文字列を取得する
@@ -89,7 +89,7 @@ namespace MyUtility
                 } while (copied + 2 == length);
                 return Marshal.PtrToStringAuto(buf, copied - 1).Split('\0');
             }
-            catch (ArgumentException ex)
+            catch (ArgumentException e)
             {
                 // 処理中に引数例外が発生した場合は、指定セクション内にキーなしとみなしてnullを返す
                 return null;
