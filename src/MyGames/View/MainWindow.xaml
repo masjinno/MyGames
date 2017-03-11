@@ -15,8 +15,16 @@
             <TextBlock Margin="5" Text="Choose a game you want to play." VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0,0"/>
         </Grid>
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
-            <Button DockPanel.Dock="Right" Content="Quit" Width="100" Margin="5"/>
-            <Button DockPanel.Dock="Right" Content="Execute" Width="100" Margin="5"/>
+            <Button DockPanel.Dock="Right"
+                    Content="Quit"
+                    Width="100"
+                    Margin="5"
+                    Command="{Binding Path=QuitCommand}"/>
+            <Button DockPanel.Dock="Right"
+                    Content="Execute"
+                    Width="100"
+                    Margin="5"
+                    Command="{Binding Path=ExecuteCommand}"/>
         </DockPanel>
         <Grid DockPanel.Dock="Bottom" Height="70">
             <TextBox DockPanel.Dock="Right"

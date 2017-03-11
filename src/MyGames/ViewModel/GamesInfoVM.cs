@@ -1,5 +1,7 @@
 ﻿using Prism.Mvvm;
+using Prism.Commands;
 using MyGames.Model;
+using System.Windows.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace MyGames.ViewModel
 {
     class GamesInfoVM : BindableBase
     {
-        #region GamesInfoVM
+        #region Binding用のプロパティ
 
         /// <summary>
         /// ゲーム説明
@@ -60,6 +62,38 @@ namespace MyGames.ViewModel
                 SelectedGameIndexChanged(SelectedGameIndex);
             }
         }
+        #endregion
+
+        #region Binding用のコマンド
+
+        /// <summary>
+        /// ゲーム実行ボタンが押されたときのコマンド
+        /// </summary>
+        public ICommand ExecuteCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    System.Windows.MessageBox.Show("ExecuteCommand");
+                });
+            }
+        }
+
+        /// <summary>
+        /// ゲーム実行ボタンが押されたときのコマンド
+        /// </summary>
+        public ICommand QuitCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    System.Windows.MessageBox.Show("QuitCommand");
+                });
+            }
+        }
+
         #endregion
 
         #region MV内部処理用プロパティ
