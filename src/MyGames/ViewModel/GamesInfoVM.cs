@@ -167,7 +167,15 @@ namespace MyGames.ViewModel
         /// <param name="newGameIndex">変更後のゲームインデックス</param>
         private void SelectedGameIndexChanged(int newGameIndex)
         {
+            // ゲーム説明更新
             Description = GamesInfoModel.GetGameDescription(newGameIndex);
+
+            // ゲームサンプルイメージ更新
+            GameSampleImage = GamesInfoModel.GetGameSampleImage(newGameIndex);
+            if (GameSampleImage == null)
+            {
+                GameSampleImage = DefaultGameSampleImage;
+            }
         }
 
         /// <summary>
