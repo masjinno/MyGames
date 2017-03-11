@@ -61,6 +61,22 @@ namespace MyGames.ViewModel
                 SelectedGameIndexChanged(SelectedGameIndex);
             }
         }
+
+        /// <summary>
+        /// ゲームのサンプルイメージ
+        /// </summary>
+        private ImageSource _sampleImage;
+        public ImageSource SampleImage
+        {
+            get
+            {
+                return _sampleImage;
+            }
+            set
+            {
+                SetProperty(ref _sampleImage, value);
+            }
+        }
         #endregion
 
         #region Binding用のコマンド
