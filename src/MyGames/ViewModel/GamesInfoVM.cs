@@ -117,6 +117,11 @@ namespace MyGames.ViewModel
         /// 設定ファイルが存在しなかった場合、これを適用する。
         /// </summary>
         private GamesInfoM GamesInfoModel { get; set; }
+
+        /// <summary>
+        /// デフォルトのゲームサンプルイメージ
+        /// </summary>
+        private ImageSource DefaultGameSampleImage { get; set; }
         #endregion
 
         /// <summary>
