@@ -145,5 +145,34 @@ namespace MyGames.ViewModel
         {
             Description = GamesInfoModel.GetGameDescription(newGameIndex);
         }
+
+        /// <summary>
+        /// デフォルトのサンプルイメージを読み込む
+        /// </summary>
+        /// <returns>サンプルイメージデータ</returns>
+        private ImageSource LoadDefaultSampleImage()
+        {
+            // 返り値用イメージソース
+            ImageSource retImageSource = null;
+
+            // イメージパス候補の配列
+            string[] imagePathArray =
+            {
+                MyGamesSettingData.DefaultGameImageDebugPath,
+                MyGamesSettingData.DefaultGameImageCopiedEnvironmentPath
+            };
+
+            // イメージパス候補からロードが成功したら返す
+            foreach (string path in imagePathArray)
+            {
+                retImageSource = ImageIO.LoadImageFile(path);
+                if (retImageSource != null)
+                {
+                    break;
+                }
+            }
+
+            return retImageSource;
+        }
     }
 }
