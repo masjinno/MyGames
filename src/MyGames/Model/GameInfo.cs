@@ -129,13 +129,13 @@ namespace MyGames.Model
             else
             {
                 // デフォルトイメージのパス(2択)
-                if (File.Exists(MyGamesSettingData.DefaultGameImageDebugPath))
+                if (File.Exists(MyGamesSettingData.DefaultGameSampleImageDebugPath))
                 {
-                    this.SampleImagePath = MyGamesSettingData.DefaultGameImageDebugPath;
+                    this.SampleImagePath = MyGamesSettingData.DefaultGameSampleImageDebugPath;
                 }
-                else if (File.Exists(MyGamesSettingData.DefaultGameImageCopiedEnvironmentPath))
+                else if (File.Exists(MyGamesSettingData.DefaultGameSampleImageCopiedEnvironmentPath))
                 {
-                    this.SampleImagePath = MyGamesSettingData.DefaultGameImageCopiedEnvironmentPath;
+                    this.SampleImagePath = MyGamesSettingData.DefaultGameSampleImageCopiedEnvironmentPath;
                 }
             }
         }

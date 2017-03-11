@@ -166,7 +166,7 @@ namespace MyGames.ViewModel
         /// デフォルトのサンプルイメージを読み込む
         /// </summary>
         /// <returns>サンプルイメージデータ</returns>
-        private ImageSource LoadDefaultSampleImage()
+        private ImageSource LoadDefaultGameSampleImage()
         {
             // 返り値用イメージソース
             ImageSource retImageSource = null;
@@ -174,8 +174,8 @@ namespace MyGames.ViewModel
             // イメージパス候補の配列
             string[] imagePathArray =
             {
-                MyGamesSettingData.DefaultGameImageDebugPath,
-                MyGamesSettingData.DefaultGameImageCopiedEnvironmentPath
+                MyGamesSettingData.DefaultGameSampleImageDebugPath,
+                MyGamesSettingData.DefaultGameSampleImageCopiedEnvironmentPath
             };
 
             // イメージパス候補からロードが成功したら返す

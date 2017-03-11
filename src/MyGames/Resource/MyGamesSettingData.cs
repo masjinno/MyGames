@@ -5,11 +5,11 @@
         /// <summary>
         /// VisualStudio上でデバッグするときに参照するデフォルトゲームイメージのパス
         /// </summary>
-        public static readonly string DefaultGameImageDebugPath = @"..\..\Resource\NoImage.png";
+        public static readonly string DefaultGameSampleImageDebugPath = @"..\..\Resource\NoImage.png";
 
         /// <summary>
         /// ゲームとランチャーをコピーした実行環境でのデフォルトゲームイメージのパス
         /// </summary>
-        public static readonly string DefaultGameImageCopiedEnvironmentPath = @".\NoImage.png";
+        public static readonly string DefaultGameSampleImageCopiedEnvironmentPath = @".\NoImage.png";
     }
 }
