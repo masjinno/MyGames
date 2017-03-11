@@ -156,6 +156,9 @@ namespace MyGames.ViewModel
 
             // ゲーム説明を初期化
             Description = GamesInfoModel.GetGameDescription(SelectedGameIndex);
+
+            // ゲームサンプルイメージを初期化
+            SampleImage = LoadDefaultGameSampleImage();
         }
 
         /// <summary>
