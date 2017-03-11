@@ -111,7 +111,7 @@ namespace MyGames.ViewModel
 
         #endregion
 
-        #region MV内部処理用プロパティ
+        #region VM内部処理用プロパティ
         /// <summary>
         /// 起動可能なゲームのリストのデフォルト値。
         /// 設定ファイルが存在しなかった場合、これを適用する。
@@ -124,6 +124,7 @@ namespace MyGames.ViewModel
         private ImageSource DefaultGameSampleImage { get; set; }
         #endregion
 
+        #region 初期化関係
         /// <summary>
         /// GamesInfoコンストラクタ
         /// </summary>
@@ -137,8 +138,30 @@ namespace MyGames.ViewModel
         /// </summary>
         private void Initialize()
         {
-            GamesInfoModel = new GamesInfoM();
+            // VM内部処理用プロパティを初期化する
+            InitializeVMProperty();
 
+            // ゲーム設定を初期化する
+            InitializeGameSetting();
+        }
+
+        /// <summary>
+        /// 本クラスの内部プロパティを初期化する
+        /// </summary>
+        private void InitializeVMProperty()
+        {
+            // ゲームサンプルイメージを初期化
+            DefaultGameSampleImage = LoadDefaultGameSampleImage();
+
+            // ゲーム情報のモデルを初期化
+            GamesInfoModel = new GamesInfoM();
+        }
+
+        /// <summary>
+        /// ゲーム設定を初期化する
+        /// </summary>
+        private void InitializeGameSetting()
+        {
             // 読み込んだゲーム数を格納する
             int numGames;
 
@@ -153,13 +176,8 @@ namespace MyGames.ViewModel
             // ロードした設定をプロパティに反映
             GameNameList = GamesInfoModel.GetGameNames();
             SelectedGameIndex = 0;
-
-            // ゲーム説明を初期化
-            Description = GamesInfoModel.GetGameDescription(SelectedGameIndex);
-
-            // ゲームサンプルイメージを初期化
-            GameSampleImage = LoadDefaultGameSampleImage();
         }
+        #endregion
 
         /// <summary>
         /// ゲームインデックス変更時の処理
