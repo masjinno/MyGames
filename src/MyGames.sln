@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Windows Desktop
-VisualStudioVersion = 14.0.25420.1
+# # Visual Studio Express 14 for Windows Desktop
+# VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGames", "MyGames\MyGames.csproj", "{3DF56189-3BE1-40E7-A709-A617A7F83CD4}"
 EndProject
