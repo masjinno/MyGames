@@ -209,5 +209,22 @@ namespace MyGames.Model
         {
             GamesList[index].StartProgram();
         }
+
+        /// <summary>
+        /// 全ゲームを終了する
+        /// </summary>
+        /// <returns>終了したゲームの数</returns>
+        public int CloseAllGame()
+        {
+            int closedPrograms = 0;
+            foreach (GameInfo gi in GamesList)
+            {
+                if (gi.ExitProgram())
+                {
+                    closedPrograms++;
+                }
+            }
+            return closedPrograms;
+        }
     }
 }
