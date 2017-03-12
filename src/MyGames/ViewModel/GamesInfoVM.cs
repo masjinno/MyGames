@@ -4,6 +4,7 @@ using MyUtility;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -104,7 +105,7 @@ namespace MyGames.ViewModel
             {
                 return new DelegateCommand(() =>
                 {
-                    System.Windows.MessageBox.Show("QuitCommand");
+                    QuitLauncher();
                 });
             }
         }
@@ -231,6 +232,35 @@ namespace MyGames.ViewModel
         private void ExecuteGame()
         {
             GamesInfoModel.StartGame(SelectedGameIndex);
+        }
+
+        /// <summary>
+        /// ランチャー終了処理
+        /// </summary>
+        private void QuitLauncher()
+        {
+            if (IsQuitOK())
+            {
+                GamesInfoModel.CloseAllGame();
+                App.Current.MainWindow.Close();
+            }
+        }
+
+        /// <summary>
+        /// 終了してよいか、対話して確認する
+        /// </summary>
+        /// <returns>true:終了する false:終了しない</returns>
+        private bool IsQuitOK()
+        {
+            // 起動済み全ゲーム終了確認メッセージ
+            MessageBoxResult mbr =
+                MessageBox.Show(
+                    "Are you sure to close all games?",
+                    "Closing all games",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+            return (mbr != MessageBoxResult.No);
         }
     }
 }
