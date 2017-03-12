@@ -226,27 +226,22 @@ namespace MyGames.Model
         /// </returns>
         public bool ExitProgram()
         {
-            // 起動していないなら何もせずfalseを返す
-            if (process != null)
+            // 起動していなければfalseを返す
+            if (process == null)
             {
-                try
-                {
-
-                    // 終了していないなら、プロセスを閉じる
-                    if (!process.HasExited)
-                    {
-                        return process.CloseMainWindow();
-                    }
-                }
-                catch (Exception e)
-                {
-                    System.Windows.MessageBox.Show(e.ToString(), "exception");
-                    return false;
-                }
+                return false;
             }
 
-            // 終了するものがない場合、falseを返す
-            return false;
+            // 起動していてプロセスが終了していなければ、プロセスを閉じる
+            if (!process.HasExited)
+            {
+                return process.CloseMainWindow();
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }
