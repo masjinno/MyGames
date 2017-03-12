@@ -46,6 +46,10 @@
                      TabIndex="0"
                      ItemsSource="{Binding Path=GameNameList}"
                      SelectedIndex="{Binding Path=SelectedGameIndex}"/>
+            <GridSplitter Grid.Column="0"
+                          Width="4"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="CurrentAndNext"/>
             <Image Grid.Column="1"
                    Margin="5"
                    Source="{Binding Path=GameSampleImage}"/>
