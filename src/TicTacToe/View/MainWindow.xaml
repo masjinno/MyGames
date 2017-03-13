@@ -5,8 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicTacToe"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="TicTacToe" Width="640" Height="480">
+    <DockPanel>
+        <DockPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF80FF80"/>
+                <GradientStop Color="#FF004000" Offset="1"/>
+            </LinearGradientBrush>
+        </DockPanel.Background>
+        <Grid DockPanel.Dock="Bottom">
+            <Button Content="Reset"
+                    Width="90"
+                    Margin="0,20"
+                    FontSize="18"/>
+        </Grid>
+        <StackPanel DockPanel.Dock="Left" Width="140">
+            <TextBlock Text="○"
+                       Margin="20,20,20,0"
+                       FontSize="98"
+                       FontWeight="Bold"
+                       FontFamily="MS Gothic"/>
+            <Rectangle Height="10"
+                       Fill="Black"
+                       Margin="20,0"/>
+            <ComboBox Margin="20,10,20,0"/>
+            <Button Content="PLAY"
+                    Margin="20,10,20,0"/>
+            <CheckBox Content="Auto Play"
+                      Margin="20,10,20,0"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right">
+            <TextBlock Text="✕"
+                       Margin="20,20,20,0"
+                       FontSize="98"
+                       FontWeight="Bold"
+                       FontFamily="MS Gothic"/>
+            <Rectangle Height="10"
+                       Fill="Black"
+                       Margin="20,0"/>
+            <ComboBox Margin="20,10,20,0"/>
+            <Button Content="PLAY"
+                    Margin="20,10,20,0"/>
+            <CheckBox Content="Auto Play"
+                      Margin="20,10,20,0"/>
+        </StackPanel>
+        <Grid Background="#FFFFC47B"
+              Margin="0,20,0,0"
+              ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Row="0"
+                     Grid.Column="0"
+                     Margin="0"
+                     >
+            <Button Content="○"
+                    />
+            </Viewbox>
+        </Grid>
+    </DockPanel>
 </Window>
