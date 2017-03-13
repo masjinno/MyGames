@@ -49,7 +49,8 @@
             <CheckBox Content="Auto Play"
                       Margin="20,10,20,0"/>
         </StackPanel>
-        <Grid Background="#FFFFC47B"
+        <Grid x:Name="BoardGrid"
+              Background="#FFFFC47B"
               Margin="0,20,0,0"
               ShowGridLines="True">
             <Grid.RowDefinitions>
@@ -62,13 +63,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Viewbox Grid.Row="0"
-                     Grid.Column="0"
-                     Margin="0"
-                     >
-            <Button Content="○"
-                    />
-            </Viewbox>
         </Grid>
     </DockPanel>
 </Window>
