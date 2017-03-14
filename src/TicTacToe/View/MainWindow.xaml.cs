@@ -20,47 +20,47 @@ namespace TicTacToe
     /// </summary>
     public partial class MainWindow : Window
     {
-        static bool IsDesignInitialized = false;
+        //static bool IsDesignInitialized = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            InitializeDesign();
+            //InitializeDesign();
         }
 
-        private void InitializeDesign()
-        {
-            if (IsDesignInitialized)
-            {
-                return;
-            }
+        //private void InitializeDesign()
+        //{
+        //    if (IsDesignInitialized)
+        //    {
+        //        return;
+        //    }
 
-            PlaceButtonsOnGrid();
+        //    PlaceButtonsOnGrid();
 
-            IsDesignInitialized = true;
-        }
+        //    IsDesignInitialized = true;
+        //}
 
-        private void PlaceButtonsOnGrid()
-        {
-            int rows = BoardGrid.RowDefinitions.Count;
-            int columns = BoardGrid.ColumnDefinitions.Count;
+        //private void PlaceButtonsOnGrid()
+        //{
+        //    int rows = BoardGrid.RowDefinitions.Count;
+        //    int columns = BoardGrid.ColumnDefinitions.Count;
 
-            Binding commandBinding;
-            Button button;
+        //    Binding commandBinding;
+        //    Button button;
 
-            for (int x = 0; x < columns; x++)
-            {
-                for (int y = 0; y < rows; y++)
-                {
-                    // 配置する
-                    button = new Button();
-                    button.Background = new ImageBrush();
-                    Grid.SetRow(button, y);
-                    Grid.SetColumn(button, x);
-                    BoardGrid.Children.Add(button);
-                }
-            }
-        }
+        //    for (int x = 0; x < columns; x++)
+        //    {
+        //        for (int y = 0; y < rows; y++)
+        //        {
+        //            // 配置する
+        //            button = new Button();
+        //            button.Background = new ImageBrush();
+        //            Grid.SetRow(button, y);
+        //            Grid.SetColumn(button, x);
+        //            BoardGrid.Children.Add(button);
+        //        }
+        //    }
+        //}
     }
 }
