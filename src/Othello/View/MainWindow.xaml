@@ -7,7 +7,15 @@
         xmlns:local="clr-namespace:Othello"
         mc:Ignorable="d"
         Title="Othello" Width="640" Height="480">
-    <Grid>
+    <DockPanel Background="LightGray">
+        <Grid DockPanel.Dock="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <View:PlayerInfo Grid.Row="0"/>
+            <View:PlayerInfo Grid.Row="1"/>
+        </Grid>
         <View:Board Margin="10"/>
-    </Grid>
+    </DockPanel>
 </Window>
