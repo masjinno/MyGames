@@ -15,10 +15,13 @@
     <StackPanel>
         <Ellipse Style="{DynamicResource ResourceKey=BlackMark}"
                  />
+        <!--
+        AIは後から実装する
         <ComboBox Margin="20,10,20,0"/>
         <Button Content="PLAY"
                 Margin="20,10,20,0"/>
         <CheckBox Content="Auto Play"
                   Margin="20,10,20,0"/>
+        -->
     </StackPanel>
 </UserControl>
