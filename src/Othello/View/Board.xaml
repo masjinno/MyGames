@@ -15,7 +15,8 @@
                     <Setter Property="Height" Value="9"/>
                 </Style>
             </Grid.Resources>
-            <!-- Xマスの内側にある●印 -->
+            <!-- Xマスの内側にある●印 ('Xマス'はオセロ用語) -->
+            <!-- Grid.Row, Grid.Column の数値5は、SettingData.ROW_SIZEとSettingData.COLUMN_SIZEが8である前提 -->
             <Ellipse Style="{DynamicResource StarEllipse}"
                      Grid.Row="1" Grid.RowSpan="2"
                      Grid.Column="1" Grid.ColumnSpan="2"/>

@@ -13,8 +13,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <View:PlayerInfo Grid.Row="0"/>
-            <View:PlayerInfo Grid.Row="1"/>
+            <View:PlayerInfo Grid.Row="0" Mark="Black"/>
+            <View:PlayerInfo Grid.Row="1" Mark="White"/>
         </Grid>
         <View:Board Margin="10"/>
     </DockPanel>

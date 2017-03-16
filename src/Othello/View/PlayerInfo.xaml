@@ -13,8 +13,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
-        <Ellipse Style="{DynamicResource ResourceKey=BlackMark}"
-                 />
+        <Ellipse x:Name="MarkEllipse"
+                 Style="{DynamicResource ResourceKey=MarkDesign}"
+                 Stroke="Black"
+                 StrokeThickness="3"
+                 Margin="20,10,20,0"/>
         <!--
         AIは後から実装する
         <ComboBox Margin="20,10,20,0"/>

@@ -17,5 +17,15 @@ namespace Othello.Resource
         /// 盤面の横サイズ
         /// </summary>
         public static readonly int COLUMN_SIZE = 8;
+
+        /// <summary>
+        /// 盤面のマーク
+        /// </summary>
+        public enum OthelloMark
+        {
+            Black,
+            White,
+            None
+        };
     }
 }
