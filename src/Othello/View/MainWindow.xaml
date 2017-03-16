@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Othello"
         mc:Ignorable="d"
-        Title="Othello" Width="640" Height="480">
+        Title="Othello" Width="640" Height="600">
     <DockPanel Background="LightGray">
         <Grid DockPanel.Dock="Right">
             <Grid.RowDefinitions>
@@ -16,6 +16,6 @@
             <View:PlayerInfo Grid.Row="0" Mark="Black"/>
             <View:PlayerInfo Grid.Row="1" Mark="White"/>
         </Grid>
-        <View:Board Margin="10"/>
+        <View:Board Margin="10,10,0,10"/>
     </DockPanel>
 </Window>
