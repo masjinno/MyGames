@@ -12,12 +12,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel Width="100">
         <Ellipse x:Name="MarkEllipse"
                  Style="{DynamicResource ResourceKey=MarkDesign}"
-                 Stroke="Black"
-                 StrokeThickness="3"
-                 Margin="20,10,20,0"/>
+                 Width="80"
+                 Height="80"
+                 Margin="0,10,0,0"/>
         <!--
         AIは後から実装する
         <ComboBox Margin="20,10,20,0"/>
